@@ -1,0 +1,66 @@
+# convert to json via `$ js-yaml tsoa.yml > tsoa.json` see https://github.com/nodeca/js-yaml
+
+# convert from swagger to postman to openAPI etc., see https://www.apimatic.io/
+
+# https://github.com/lukeautry/tsoa
+entryFile: ./src/app.ts
+spec: 
+  specVersion: 3
+  outputDirectory: ./def  # output from '$ tsoa spec'
+  
+  # https://github.com/lukeautry/tsoa#authentication
+  securityDefinitions:
+    api_key: 
+      description: A key used to restrict access and apply quotas (TODO needs implementation...)
+      type: apiKey
+      in: header
+      name: X-key
+    auth: 
+      description: A user authentication token (TODO needs implementation like JWT)
+      # use apiKey since defining custom header 
+      # see https://swagger.io/docs/specification/authentication/api-keys/
+      type: apiKey
+      in: header
+      name: X-auth
+    some_test: 
+      description: Used to test middleware (TODO remove for prod)
+      type: apiKey
+      name: X-auth
+      in: header
+      scopes: 
+        write: demonstrates usage of a scope
+routes: 
+  routesDir: ./src
+  middleware: express
+  authenticationModule: ./src/middleware/authentication.ts
+
+# tsoa takes info from package.json
+# # https://swagger.io/docs/specification/basic-structure/
+# info: 
+#   title: pokemon
+#   version: 1.0.0
+#   description: pokemon API
+
+# see https://swagger.io/docs/specification/api-host-and-base-path/ for definition in tsoa
+servers:
+  - url: '{protocol}://{environment}/'
+    description: pokemon api server (production uses live data and both dev and staging use test data)
+    variables:
+      environment:
+        default: api            # Production server
+        enum:
+          - pokemon.com         # Production server
+          - dev.pokemon.com     # Staging server
+          - localhost:8080      # Local development server
+      protocol:
+        default: https
+        enum:
+          - http
+          - https
+
+# NOTE: tsoa currently doesn't follow the spec to override 'securitySchemes' for auth
+# # https://swagger.io/docs/specification/authentication/
+# components:
+#   securitySchemes:
+   
+     

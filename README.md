@@ -1,8 +1,14 @@
+TODO: Add Travis build badge
+
 # Test for Dream Job on Quantum Team
 
 ## Getting Started
 ```bash
-# TODO:...
+# Install global dependencies (one-time install)
+npm i -g tsoa js-yaml 
+
+# Install project dependencies
+cd api && npm i
 
 ```
 
@@ -19,10 +25,11 @@ TODO: add collections and provide link
 TODO: implement and provide a link 
 
 ## Database (Database)
-While the _Pokemon_ data appears to be consistently structured currently (which would favor a SQL pattern), _Pokemons_ have a tendency to evolve and change given the unpredictable nature of super powers. Therefore, I have chosen a document db (ie: Mongo) so that I will have more agility when it comes to mutating the data structure as the project matures. I will take care to build typed interfaces for my data models so as to twart against data inconsistencies at scale. In general, when implemented properly, in the long-run a document DB can be used to more easily achieve performance at scale if the data structure is normalized and flattened as much as possible. 
+While the _Pokemon_ data appears to be consistently structured currently (which would favor a SQL pattern), _Pokemons_ have a tendency to evolve and change given the unpredictable nature of super powers. Therefore, I have chosen a document db (ie: Mongo) so that I will have more agility when it comes to mutating the data structure as the project matures. I will take care to build typed interfaces for my data models so as to thwart against data inconsistencies at scale. In general, when implemented properly, in the long-run a document DB can be used to more easily achieve performance at scale if the data structure is normalized and flattened as much as possible. 
 
 ## UI (Front-end)
 TODO: create angular with carbon components, as a bonus to visualize the data if there is time
+TODO: include a giphy animation of ui and how it works
 
 ## Tests
 TODO: TDD, Mocha, Chain, How to run?...

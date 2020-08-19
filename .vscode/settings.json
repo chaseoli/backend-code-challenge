@@ -1,0 +1,30 @@
+{
+    "editor.minimap.maxColumn": 60,
+    "peacock.affectActivityBar": true,
+    "peacock.affectStatusBar": true,
+    "peacock.affectTitleBar": false,
+    "peacock.favoriteColors": [{
+            "name": "blue-green",
+            "value": "#1f99a1"
+        }
+    ],
+    "editor.maxTokenizationLineLength": 20000,
+    "workbench.colorCustomizations": {
+        // Pokemon Colors
+        "activityBar.background": "#ffee00",
+        "activityBar.foreground": "#808080",
+        "activityBar.inactiveForeground": "#000",
+        "activityBarBadge.background": "#808080",
+        "activityBarBadge.foreground": "#15202b",
+        "statusBar.background": "#000",
+        "statusBarItem.hoverBackground": "#ffee00",
+        "statusBar.foreground": "#808080",
+        "activityBar.activeBackground": "#000",
+        "activityBar.activeBorder": "#000",
+        "statusBar.border": "#000"
+    },
+    "cSpell.words": [
+        "giphy",
+        "tsoa"
+    ]
+}
