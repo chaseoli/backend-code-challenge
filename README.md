@@ -1,29 +1,26 @@
-# Challenges Coding Exercise Backend
+# Test for Dream Job on Quantum Team
 
-We have provided you with Pokemon data in a json file. Your mission is to create a database and expose the database to a API. Basically, you need to:
+## API Server (Back-end)
+The application level architecture for this API utilizes a controller based approach to contain the logic for all endpoints. Javascript decorators in controllers are used by TSOA (the api framework) to generate swagger documentation. The middleware.ts contains all the middleware logic for this application 
 
-- Design the database to store information for the Pokemon data
-- Load the database with the data
-- Implement the API Interface withe the following features:
+TODO: Migrate to loopback.io instead of TSOA if there is time
 
-  - Query pokemons with the options:
-    - Pagination
-    - Search by name
-    - Filter by pokemon type
-    - Filter by favorite
-  - Query a pokemon by id
-  - Query a pokemon by name
-  - Query list of pokemon types
-  - Mutation to mark/unmark pokemon as favorite
+### Postman Collections
+TODO: add collections and provide link 
 
-- **Tests** are important and if time allows it, we'd like to see _some_ test coverage.
+### OpenAPI Definition (Swagger)
+TODO: implement and provide a link 
 
-### Technology
+## Database (Database)
+While the _Pokemon_ data appears to be consistently structured currently (which would favor a SQL pattern), _Pokemons_ have a tendency to evolve and change given the unpredictable nature of super powers. Therefore, I have chosen a document db (ie: Mongo) so that I will have more agility when it comes to mutating the data structure as the project matures. I will take care to build typed interfaces for my data models so as to twart against data inconsistencies at scale. In general, when implemented properly, in the long-run a document DB can be used to more easily achieve performance at scale if the data structure is normalized and flattened as much as possible. 
 
-Remember that our technology stack is:
+## UI (Front-end)
+TODO: create angular with carbon components 
 
-- Loopback.io (Javascript and Typescript)
-- MongoDB / PostgreSQL
+## Tests
+TODO: TDD, Mocha, Chain, How to run...
 
-Be careful with your decisitions. You can use the framework that you prefer, but please write the challenge in JS or TS. You can choose MongoDB or PostgreSQL like database, be free but take in consideration the best database to store the data provided in the JSON file.
+## Deployment 
+TODO: Docker container / serverless
+
 
