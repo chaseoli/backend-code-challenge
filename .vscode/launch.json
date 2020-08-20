@@ -21,9 +21,7 @@
       "internalConsoleOptions": "neverOpen",
       "localRoot": "${workspaceRoot}",
       "outFiles": ["${workspaceRoot}/api/lib/**/*.js"],
-      "env": {
-        "build": "dev"
-      }
+      "envFile": "${workspaceFolder}/api/dev.env"
     },
     {
       // Attach to running API locally (ie: $ bash api/debug-dev.bash)

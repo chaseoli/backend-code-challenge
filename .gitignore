@@ -50,7 +50,7 @@ Thumbs.db
 
 # Secrets
 .secrets/**/*
-.env
+*.env
 
 # Temp Firebase
 .firebase/

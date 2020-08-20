@@ -17,7 +17,8 @@ export interface IEnv extends ISecrets, IDevSecrets {
 
    cicd: 'local' | 'githubaction' // used by tests too 
 
-  
+   gcp_project_number: string
+   
 }
 
 interface IDevSecrets {
@@ -27,7 +28,5 @@ interface IDevSecrets {
 
 export interface ISecrets {
    // the following will be set and retrieved via Secret Manager
-
-   // ...
-
+   db_uri: string // mongo connection string with password
 }
