@@ -5,7 +5,7 @@ TODO: Add Travis build badge
 ## Getting Started
 ```bash
 # Install global dependencies (first time only)
-npm i -g tsoa js-yaml typescript
+npm i -g tsoa js-yaml typescript @angular/cli
 
 # Install project dependencies (first time only)
 cd api && npm i 
@@ -15,6 +15,7 @@ npm start
 
 # Done! Go to http://localhost:4200
 
+# NOTE: if using vscode you can also use launch.json configs
 ```
 
 # Architecture
