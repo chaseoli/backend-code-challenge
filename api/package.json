@@ -7,7 +7,8 @@
     "node": ">=8"
   },
   "scripts": {
-    "start": "node app.js",
+    "start": "sh scripts/build.sh && sh scripts/start-dev.sh",
+    "start-debug": "sh scripts/build.sh && sh scripts/start-debug.sh",
     "start-docker": "node lib/app.js",
     "test": "mocha --require ts-node/register --timeout 999999 --colors --exit src/spec/**/*.spec.ts",
     "deploy-prod": "bash deploy-api.bash -i -e prod",
