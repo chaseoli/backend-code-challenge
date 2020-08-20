@@ -109,19 +109,9 @@ export class AuthenticationError extends BaseError {
     }
 }
 
-class GenericDatabaseError extends BaseError {
-    constructor(message?: string, dbError?: any) {
-        super(message, dbError)
-        // this.name ='DO NOT SET, set at the child level via polymorph'
-    }
-}
-
 export class DatabaseError extends BaseError {
-    constructor(message?: string, dbError?: any, uid?: string) {
+    constructor(message?: string, dbError?: any) {
         let _message = message
-        if (uid) {
-            _message = _message + `uid: ${uid}`
-        }
         super(_message, dbError)
         this.name = 'DatabaseError'
     }

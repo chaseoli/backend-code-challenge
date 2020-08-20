@@ -5,7 +5,7 @@ TODO: Add Travis build badge
 ## Getting Started
 ```bash
 # Install global dependencies (one-time install)
-npm i -g tsoa js-yaml 
+npm i -g tsoa js-yaml typescript
 
 # Install project dependencies
 cd api && npm i

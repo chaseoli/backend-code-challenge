@@ -11,10 +11,7 @@
       "runtimeExecutable": "node",
       "request": "launch",
       "protocol": "inspector",
-      "runtimeArgs": [
-        "--nolazy",
-        "--inspect-brk=5858"
-      ],
+      "runtimeArgs": ["--nolazy", "--inspect-brk=5858"],
       "timeout": 30000,
       "port": 5858,
       "sourceMaps": true,
@@ -22,11 +19,23 @@
       "program": "${workspaceFolder}/api/src/app.ts",
       "console": "integratedTerminal",
       "internalConsoleOptions": "neverOpen",
-      "outFiles": [
-        "${workspaceRoot}/api/lib/**/*.js"
-      ],
+      "localRoot": "${workspaceRoot}",
+      "outFiles": ["${workspaceRoot}/api/lib/**/*.js"],
       "env": {
+        "build": "dev"
       }
+    },
+    {
+      // Attach to running API locally (ie: $ bash api/debug-dev.bash)
+      "name": "attach ./api",
+      "type": "node",
+      "request": "attach",
+      "protocol": "inspector",
+      "timeout": 30000,
+      "port": 5858,
+      "sourceMaps": true,
+      "localRoot": "${workspaceRoot}",
+      "outFiles": ["${workspaceRoot}/api/lib/**/*.js"]
     },
     {
       // Debug unit tests in TS

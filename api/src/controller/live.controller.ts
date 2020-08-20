@@ -1,7 +1,6 @@
 import { Route, Controller, Get, OperationId, Security, Request, Post } from 'tsoa';
-import { IRequestUser } from '../models/core/core';
 
-@Route('test')
+@Route('live')
 export class TestController extends Controller {
 
     /**
@@ -11,36 +10,29 @@ export class TestController extends Controller {
      * @returns
      * @memberof TestController
      */
-    @Get('msg')
-    @OperationId('testMsg')
-    @Security({
-        'api_key': [],
-        'some_test': ['write:testData']
-    })
+    @Get('test')
+    @OperationId('test')
     public async test(
         @Request() request: any
     ) {
-        if (request.user) {
-            console.log('auth data set from authentication.ts: ', request.user);
-        }
         return 'some test message';
     }
 
     /**
      * Basic test endpoint to try authentication mechanisms out with the API
      *
-     * @param {IRequestUser} request
-     * @returns
+     * @param {*} request
+     * @return {*} 
      * @memberof TestController
      */
     @Post('auth')
     @OperationId('testAuth')
     @Security({
         'api_key': [],
-        'owns_stellar_account': ['read:body.senderAddress'],
+        'live_auth': ['read:body.senderAddress'],
     })
     public async auth(
-        @Request() request: IRequestUser
+        @Request() request: any
     ) {
         if (request.user) {
             console.log('auth data set from authentication.ts: ', request.user);

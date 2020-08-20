@@ -37,9 +37,6 @@ export class Config {
         // parse application/json
         this.app.use(bodyParser.json())
 
-        // start test endpoints
-        this.test()
-
     }
 
     start() {
@@ -49,28 +46,6 @@ export class Config {
         this.app.listen(port, () => {
             console.log(`App listening on port ${port}`)
         })
-
-    }
-
-    private test() {
-
-        // IMPORTANT: Only expose test endpoints in dev so as not 
-        // increase the public *attack* surface
-        if (process.env.build === 'dev') {
-
-            this.app.get('/test', (req: any, res: any) => {
-                console.info('Test Log from calling /test')
-                res.send('Fired /test successfully. Please check log for test log output.')
-            })
-
-            this.app.get('/', (req: any, res: any) => {
-                res
-                    .status(200)
-                    .send('API running...')
-                    .end()
-            })
-
-        }
 
     }
 

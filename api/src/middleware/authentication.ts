@@ -8,34 +8,34 @@ import { AuthenticationError } from '../err'
 export async function expressAuthentication(request: express.Request, securityName: string, scopes?: string[]): Promise<any> {
 
 
-    // used by functions to get uid and email for authenticated user via auth header
-    async function getAuthToken() {
-        try {
+    // // used to get uid and email for authenticated user via auth header
+    // async function getAuthToken() {
+    //     try {
 
-            // check if header exists
-            if (_.isEmpty(request.headers['x-auth'])) {
+    //         // check if header exists
+    //         if (_.isEmpty(request.headers['x-auth'])) {
 
-                // missing x-auth
-                throw 'authentication required'
+    //             // missing x-auth
+    //             throw 'authentication required'
 
-            } else {
+    //         } else {
 
-                // verify the auth token
-                //  TODO:
+    //             // verify the auth token
+    //             //  TODO:
 
-            }
+    //         }
 
-        } catch (error) {
-            // not able to verify
-            return Promise.reject(
-                new AuthenticationError(`auth error: ${error}`)
-            )
+    //     } catch (error) {
+    //         // not able to verify
+    //         return Promise.reject(
+    //             new AuthenticationError(`auth error: ${error}`)
+    //         )
 
-        }
-    }
+    //     }
+    // }
 
-    // just a test see test.controller.ts
-    if (securityName === 'some_test') {
+    // just a test see live.controller.ts
+    if (securityName === 'live_auth') {
 
         console.log('scope is defined in controller and read at authentication.ts: ', scopes)
 

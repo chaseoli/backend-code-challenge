@@ -1,7 +1,7 @@
 import { RegisterRoutes } from './routes'
 import { Config } from './config'
 
-import './controller/test.controller'
+import './controller/live.controller'
 
 import { customResponseHandler } from './middleware/response'
 
