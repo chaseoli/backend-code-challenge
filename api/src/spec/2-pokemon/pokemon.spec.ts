@@ -147,12 +147,19 @@ describe('MongoClient', () => {
   })
 
   it('should mark favorites', async () => {
+    
+  })
+
+  it('should get all favorites', async () => {
 
   })
 
-  it('should get all favorites', async () => {})
+  it('should un-mark favorites', async () => {
 
-  it('should un-mark favorites', async () => {})
+  })
 
-  it('should get paginated results for max qty', async () => {})
+  it('should get paginated results for max qty', async () => {
+
+  })
+
 })
