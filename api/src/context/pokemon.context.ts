@@ -24,9 +24,11 @@ export class PokemonContext {
       // NOTE: While mongo can be searched with a regex
       // this is not recommended and can be slow at scale
       // use collation instead for better performance
-      options = (await this.db
-        .find({ name: name })
-        .collation({ locale: 'en', strength: 2 })) as any
+      const cursor = this.db
+        .find({ name: new RegExp(name, 'i') })
+        .collation({ locale: 'en', strength: 2 })
+      // const cursor = this.db.find({ $text: { $search: name } })
+      options = await cursor.toArray()
     } else {
       // only send back the exact match as option
       options.push(match)
@@ -40,8 +42,8 @@ export class PokemonContext {
 
   async getAllTypes(): Promise<string[]> {
     // Query list of pokemon types
-    // TODO: ...
-    return []
+    const types = await this.db.distinct('types')
+    return types
   }
 
   async getFavorites(id: string): Promise<IPokemon[]> {
@@ -53,6 +55,16 @@ export class PokemonContext {
   async updateFavorite(id: string, isFavorite: boolean): Promise<void> {
     // Mutation to mark/unmark pokemon as favorite
     // TODO: ...
+    return
+  }
+
+  async createTextSearchIndex() {
+    await this.db.createIndex({ name: 'text' })
+    return
+  }
+
+  async createUniqueIdIndex() {
+    await this.db.createIndex({ id: 1 }, { unique: true })
     return
   }
 }
