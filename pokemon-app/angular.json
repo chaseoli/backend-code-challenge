@@ -30,6 +30,16 @@
             "styles": [
               "src/styles.scss"
             ],
+            "allowedCommonJsDependencies": [
+              "lodash",
+              "@firebase/app",
+              "@firebase/functions",
+              "@firebase/auth",
+              "@firebase/database",
+              "@firebase/util",
+              "firebase/app",
+              "buffer"
+            ],
             "scripts": []
           },
           "configurations": {

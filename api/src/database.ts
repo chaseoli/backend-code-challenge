@@ -1,6 +1,6 @@
 import { MongoClient } from 'mongodb'
 import { DatabaseError } from './err'
-import { IGlobal } from './models/env.model'
+import { IGlobal } from './models/env.type'
 
 declare var global: IGlobal
 

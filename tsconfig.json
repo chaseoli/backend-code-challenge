@@ -1,5 +1,5 @@
 // used by vscode code editor to lint files
-// ie: experimentalDecorators used in tsoa at ./apis/client/...
+// ie: experimentalDecorators used in tsoa at ./api/...
 {
   "compilerOptions": {
     "module": "commonjs",

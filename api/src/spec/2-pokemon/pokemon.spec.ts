@@ -1,7 +1,7 @@
 import { describe, it } from 'mocha'
 import { expect } from 'chai'
 import { Db } from 'mongodb'
-import { IGlobal } from '../../models/env.model'
+import { IGlobal } from '../../models/env.type'
 import { PokemonContext } from '../../context/pokemon.context'
 
 declare var global: IGlobal

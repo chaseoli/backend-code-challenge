@@ -5,7 +5,7 @@ import {
   // before
 } from 'mocha'
 // import { expect } from 'chai'
-import { IEnv } from '../../models/env.model'
+import { IEnv } from '../../models/env.type'
 import * as _ from 'lodash'
 
 declare var process: {

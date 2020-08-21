@@ -1,5 +1,5 @@
-import { IPokemon, IPokemonTextSearch } from '../models/pokemon.model'
-import { IGlobal } from '../models/env.model'
+import { IPokemon, IPokemonTextSearch } from '../models/pokemon.type'
+import { IGlobal } from '../models/env.type'
 declare var global: IGlobal
 
 export class PokemonContext {

@@ -1,7 +1,7 @@
 import { describe, it } from 'mocha'
 import { expect } from 'chai'
 import { MongoClient } from 'mongodb'
-import { IGlobal } from '../../models/env.model'
+import { IGlobal } from '../../models/env.type'
 import { startMongo } from '../../database'
 
 declare var global: IGlobal

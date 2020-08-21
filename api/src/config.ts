@@ -1,6 +1,6 @@
 import cors from 'cors'
 import express from 'express'
-import { IEnv } from './models/env.model'
+import { IEnv } from './models/env.type'
 const helmet = require('helmet')
 import * as bodyParser from 'body-parser'
 import _ from 'lodash'
