@@ -66,18 +66,32 @@ describe('MongoClient', () => {
     }
   })
 
-  it('should create text search index', async () => {
-    try {
-      await db.createTextSearchIndex()
-      // check if index exists
-      // if so, delete it
-      // check that it was deleted
-      // re-create it
-      // check that it was re-created
-    } catch (error) {
-      expect(error).to.be.null
-    }
-  })
+  //   it('should create text search index', async () => {
+  //     try {
+  //       await db.createTextSearchIndex()
+  //       // check if index exists
+  //       // if so, delete it
+  //       // check that it was deleted
+  //       // re-create it
+  //       // check that it was re-created
+  //     } catch (error) {
+  //       expect(error).to.be.null
+  //     }
+  //   })
+
+  //   it('should create unique index for ids', async () => {
+  //     try {
+  //       await db.createUniqueIdIndex()
+  //       // TODO: ...
+  //       // check if index exists
+  //       // if so, delete it
+  //       // check that it was deleted
+  //       // re-create it
+  //       // check that it was re-created
+  //     } catch (error) {
+  //       expect(error).to.be.null
+  //     }
+  //   })
 
   it('should get pokemon by exact name', async () => {
     try {
@@ -132,11 +146,13 @@ describe('MongoClient', () => {
     }
   })
 
-  it('should mark as favorite', async () => {})
+  it('should mark favorites', async () => {
+
+  })
 
   it('should get all favorites', async () => {})
 
-  it('should un-mark as favorite', async () => {})
+  it('should un-mark favorites', async () => {})
 
   it('should get paginated results for max qty', async () => {})
 })
