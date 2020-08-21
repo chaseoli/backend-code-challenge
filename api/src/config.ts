@@ -1,18 +1,15 @@
 import cors from 'cors'
 import express from 'express'
-import { IEnv, IGlobal } from './models/env.model'
+import { IEnv } from './models/env.model'
 const helmet = require('helmet')
 import * as bodyParser from 'body-parser'
 import _ from 'lodash'
-import { MongoClient } from 'mongodb'
 import { loadSecrets } from './middleware/secret-manager'
-import { DatabaseError } from './err'
+import { startMongo } from './database'
 
 declare var process: {
   env: IEnv
 }
-
-declare var global: IGlobal
 
 export class Config {
   app: express.Application
@@ -55,7 +52,7 @@ export class Config {
       if (!databaseStarted) {
         _.set(global, 'database_started', true)
         // start mongo db
-        await this.startMongo()
+        await startMongo()
       }
 
       next()
@@ -160,19 +157,6 @@ export class Config {
     } catch (error) {
       console.error(error)
     }
-  }
-
-  private async startMongo() {
-    global.mongoClient = (await MongoClient.connect(
-      process.env.db_uri,
-      // TODO: Connection Pooling
-      // Set the poolSize to 50 connections.
-      // TODO: Timeouts
-      // Set the write timeout limit to 2500 milliseconds.
-      { useNewUrlParser: true }
-    ).catch((err) => {
-      new DatabaseError('failed to initialize database', err)
-    })) as MongoClient
   }
 
   // private setCorsConfig(): express.RequestHandler {

@@ -37,3 +37,8 @@ interface IEvolutions {
   id: number // 2,
   name: string // "Ivysaur"
 }
+
+interface IPokemonTextSearch {
+    match: IPokemon,
+    options:IPokemon[]
+}

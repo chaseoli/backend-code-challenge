@@ -54,7 +54,7 @@
       "console": "integratedTerminal",
       "internalConsoleOptions": "neverOpen",
       "protocol": "inspector",
-      "env": {}
+      "envFile": "${workspaceFolder}/api/dev.env"
     }
   ]
 }
