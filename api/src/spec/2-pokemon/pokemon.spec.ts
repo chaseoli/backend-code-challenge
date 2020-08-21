@@ -6,7 +6,7 @@ import { PokemonContext } from '../../context/pokemon.context'
 
 declare var global: IGlobal
 
-describe('MongoClient', () => {
+describe('pokemon data', () => {
   let db: PokemonContext
   let database: Db
   before(async () => {

@@ -125,6 +125,14 @@ export class PokemonError extends BaseError {
     }
 }
 
+export class UserError extends BaseError {
+    constructor(message?: string, dbError?: any) {
+        let _message = message
+        super(_message, dbError)
+        this.name = 'UserError'
+    }
+}
+
 // Why use custom error handling? See function err() below:  
 // 1. ensures consistency in logging errors (eg: stackdriver captures console.log())
 // 2. if the error type is unknown throw an unhandled exception (forcing a restart if not caught by try/catch)

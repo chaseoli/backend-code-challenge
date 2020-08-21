@@ -9,12 +9,25 @@ export class PokemonContext {
     // sure that the id field is unique
     await this.db.insertMany(pokemons)
   }
+  /**
+   * Query a pokemon by id
+   *
+   * @param {string} id
+   * @return {*}  {Promise<IPokemon>}
+   * @memberof PokemonContext
+   */
   async getById(id: string): Promise<IPokemon> {
-    // Query a pokemon by id
     return await this.db.findOne({ id: id })
   }
+
+  /**
+   * Query a pokemon by exact name
+   *
+   * @param {string} name
+   * @return {*}  {Promise<IPokemonTextSearch>}
+   * @memberof PokemonContext
+   */
   async getByName(name: string): Promise<IPokemonTextSearch> {
-    // Query a pokemon by exact name
     let match = await this.db.findOne({ name: name })
 
     let options = []
@@ -40,20 +53,38 @@ export class PokemonContext {
     }
   }
 
+  /**
+   * Query list of pokemon types
+   *
+   * @return {*}  {Promise<string[]>}
+   * @memberof PokemonContext
+   */
   async getAllTypes(): Promise<string[]> {
-    // Query list of pokemon types
     const types = await this.db.distinct('types')
     return types
   }
 
+  /**
+   * Query list of pokemon types
+   *
+   * @param {string} id
+   * @return {*}  {Promise<IPokemon[]>}
+   * @memberof PokemonContext
+   */
   async getFavorites(id: string): Promise<IPokemon[]> {
-    // Query list of pokemon types
     // TODO: ...
     return []
   }
 
+  /**
+   * Mutation to mark/unmark pokemon as favorite
+   *
+   * @param {string} id
+   * @param {boolean} isFavorite
+   * @return {*}  {Promise<void>}
+   * @memberof PokemonContext
+   */
   async updateFavorite(id: string, isFavorite: boolean): Promise<void> {
-    // Mutation to mark/unmark pokemon as favorite
     // TODO: ...
     return
   }

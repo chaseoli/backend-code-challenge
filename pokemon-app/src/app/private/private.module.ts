@@ -14,11 +14,12 @@ import { CustomLoadingComponent } from '../shared/components/loading.component'
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http'
 import { AuthComponent } from './auth/auth.component'
 import { AuthInterceptor } from '../shared/interceptor/auth.interceptor'
+import { UserService } from '../shared/services/user.service'
+import { PokemonService } from '../shared/services/pokemon.service'
 
 @NgModule({
   declarations: [
     DashboardComponent,
-
     PrivateComponent,
     SwitcherComponent,
     CustomLoadingComponent,
@@ -29,6 +30,8 @@ import { AuthInterceptor } from '../shared/interceptor/auth.interceptor'
     SessionService,
     LodashService,
     SessionResolver,
+    UserService,
+    PokemonService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,

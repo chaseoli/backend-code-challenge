@@ -81,13 +81,13 @@ export class PrivateComponent implements OnInit {
       this.leftNavLogoutHide = false
       this.hamburgerHide = true
       this.leftNavHide = true
-      this.name = 'beskar'
+      this.name = 'pokemon'
       // this.brand = ''
     } else {
       this.leftNavLogoutHide = true
       this.hamburgerHide = false
       this.leftNavHide = false
-      this.name = 'beskar'
+      this.name = 'pokemon'
       // this.brand = 'Project'
     }
 

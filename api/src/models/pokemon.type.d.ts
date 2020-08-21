@@ -33,12 +33,12 @@ interface IMeasurements {
   maximum: string // "0.79m" for height, "7.76kg" for weight
 }
 
-interface IEvolutions {
+export interface IEvolutions {
   id: number // 2,
   name: string // "Ivysaur"
 }
 
 interface IPokemonTextSearch {
-    match: IPokemon,
-    options:IPokemon[]
+  match: IPokemon
+  options: IPokemon[]
 }

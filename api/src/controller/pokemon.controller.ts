@@ -22,7 +22,7 @@ export class PokemonController extends Controller {
       }
     } catch (error) {
       const e = new PokemonError('failed to save pokemon to database', error)
-      this.setStatus(500)
+      this.setStatus(400)
       return {
         errorMessage: e.message,
         errorId: e.id,
@@ -41,7 +41,7 @@ export class PokemonController extends Controller {
         'failed to query pokemon by id from database',
         error
       )
-      this.setStatus(500)
+      this.setStatus(400)
       return {
         errorMessage: e.message,
         errorId: e.id,
@@ -62,7 +62,7 @@ export class PokemonController extends Controller {
         'failed to query pokemon by name from database',
         error
       )
-      this.setStatus(500)
+      this.setStatus(400)
       return {
         errorMessage: e.message,
         errorId: e.id,
@@ -81,7 +81,7 @@ export class PokemonController extends Controller {
         'failed to query pokemon types from database',
         error
       )
-      this.setStatus(500)
+      this.setStatus(400)
       return {
         errorMessage: e.message,
         errorId: e.id,

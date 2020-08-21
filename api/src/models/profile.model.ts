@@ -58,7 +58,7 @@ export class Person {
       this.model.uid = uid
 
       // save person to stellar as new user profile
-      await this.db.registerUser(uid, this.model)
+      await this.db.register(uid, this.model)
 
       return this.model
     } catch (error) {

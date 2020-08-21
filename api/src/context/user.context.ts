@@ -4,13 +4,44 @@ declare var global: IGlobal
 
 export class UserContext {
   private db = global.mongoClient.db('quantum_pokemon').collection('users')
-  async getByUid(id: string): Promise<IPerson> {
-    return await this.db.findOne({ id: id })
+
+  /**
+   * Gets a user by their firebase uid
+   *
+   * @param {string} uid
+   * @return {*}  {Promise<IPerson>}
+   * @memberof UserContext
+   */
+  async getByUid(uid: string): Promise<IPerson> {
+    return await this.db.findOne({ uid: uid })
   }
-  async registerUser(uid: string, person: IPerson) {
-    // TODO: check that the user does not already exist
-    await this.db.insert({
-      [uid]: person,
-    })
+
+  /**
+   * Creates a new user in the database
+   *
+   * @param {IPerson} person
+   * @return {*}
+   * @memberof UserContext
+   */
+  async register(person: IPerson) {
+    // check that the user does not already exist
+    const exists = await this.getByUid(person.uid)
+    if (!exists) {
+      // create user if they don't yet exist
+      return await this.db.insertOne(person)
+    } else {
+      return Promise.reject(`user ${person.email} already exists`)
+    }
+  }
+
+  /**
+   * Delete user by uid
+   *
+   * @param {string} uid
+   * @return {*}
+   * @memberof UserContext
+   */
+  async delete(uid: string) {
+    return await this.db.deleteMany({ uid: uid })
   }
 }

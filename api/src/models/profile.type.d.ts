@@ -1,3 +1,5 @@
+import { IEvolutions } from "./pokemon.type";
+
 export interface IRequestUser { user: { uid: string, email: string } }
 
 export interface IRoot {
@@ -36,11 +38,12 @@ interface ILocality {
 
 }
 
-export interface IPerson {
+export interface IPerson  {
 
     uid: string
-
-    profile: IPersonProfile
+    email: string
+    profile?: IPersonProfile
+    pokemon_favorites?: IEvolutions[]
 
 }
 
