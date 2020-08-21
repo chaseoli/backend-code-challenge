@@ -1,28 +1,54 @@
-import { Route, Controller, OperationId, Post, Body, Get, Query } from 'tsoa'
+import {
+  Route,
+  Controller,
+  OperationId,
+  Post,
+  Body,
+  Get,
+  Request,
+  Security,
+} from 'tsoa'
 import { UserError } from '../err'
 import {
   IGenericHttpResponse,
   IGenericErrorResponse,
 } from '../models/generic.type'
 import { UserContext } from '../context/user.context'
-import { IPerson } from '../models/profile.type'
+import { IPerson, IRequestUser } from '../models/profile.type'
 
 @Route('user')
 export class UserController extends Controller {
   private userDb = new UserContext()
   @Post()
   @OperationId('personAdd')
+  @Security({
+    user: [],
+  })
   public async add(
-    @Body() person: IPerson
+    @Body() person: IPerson,
+    @Request() request: IRequestUser
   ): Promise<IGenericHttpResponse | IGenericErrorResponse> {
-    try {
-      await this.userDb.register(person)
-      return {
-        message: `registered new user ${person.email}`,
+    // check if the requesting uid matches the profile uid
+    // ie: user should only be able to edit their own profile
+    if (request.user.uid === person.uid) {
+      try {
+        await this.userDb.register(person)
+        return {
+          message: `registered new user ${person.email}`,
+        }
+      } catch (error) {
+        const e = new UserError(`failed to register ${person.email}`, error)
+        this.setStatus(400)
+        return {
+          errorMessage: e.message,
+          errorId: e.id,
+        }
       }
-    } catch (error) {
-      const e = new UserError(`failed to register ${person.email}`, error)
-      this.setStatus(400)
+    } else {
+      const e = new UserError(
+        `${person.email} is not allowed to write to this profile`
+      )
+      this.setStatus(401)
       return {
         errorMessage: e.message,
         errorId: e.id,
