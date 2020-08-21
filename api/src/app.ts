@@ -2,6 +2,7 @@ import { RegisterRoutes } from './routes'
 import { Config } from './config'
 
 import './controller/live.controller'
+import './controller/pokemon.controller'
 
 import { customResponseHandler } from './middleware/response'
 

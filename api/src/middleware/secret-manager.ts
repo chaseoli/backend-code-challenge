@@ -1,6 +1,6 @@
 // based from https://cloud.google.com/secret-manager/docs/creating-and-accessing-secrets
 
-import { IEnv } from '../models/env'
+import { IEnv } from '../models/env.model'
 import { SecretManagerServiceClient } from '@google-cloud/secret-manager'
 
 // secret-manager.ts should only access secrets.

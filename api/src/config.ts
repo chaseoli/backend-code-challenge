@@ -1,6 +1,6 @@
 import cors from 'cors'
 import express from 'express'
-import { IEnv } from './models/env'
+import { IEnv, IGlobal } from './models/env.model'
 const helmet = require('helmet')
 import * as bodyParser from 'body-parser'
 import _ from 'lodash'
@@ -11,6 +11,8 @@ import { DatabaseError } from './err'
 declare var process: {
   env: IEnv
 }
+
+declare var global: IGlobal
 
 export class Config {
   app: express.Application
@@ -39,7 +41,6 @@ export class Config {
     // app would have to wait to get secrets before booting up completely
     this.app.use(async (req, res, next) => {
       const secretsLoaded = _.get(global, 'secrets_loaded', false)
-
       // get container secrets from secret manager
       if (!secretsLoaded && process.env.build === 'prod') {
         // update global value denoting that secrets are loaded
@@ -49,8 +50,13 @@ export class Config {
         await loadSecrets()
       }
 
-      // start mongo db
-      await this.startMongo()
+      // start the db if not previously started
+      const databaseStarted = _.get(global, 'database_started', false)
+      if (!databaseStarted) {
+        _.set(global, 'database_started', true)
+        // start mongo db
+        await this.startMongo()
+      }
 
       next()
     })
@@ -157,7 +163,7 @@ export class Config {
   }
 
   private async startMongo() {
-    await MongoClient.connect(
+    global.mongoClient = (await MongoClient.connect(
       process.env.db_uri,
       // TODO: Connection Pooling
       // Set the poolSize to 50 connections.
@@ -166,7 +172,7 @@ export class Config {
       { useNewUrlParser: true }
     ).catch((err) => {
       new DatabaseError('failed to initialize database', err)
-    })
+    })) as MongoClient
   }
 
   // private setCorsConfig(): express.RequestHandler {
