@@ -1,0 +1,54 @@
+<form [fxHide]='!hidePasswordForm' [formGroup]="emailForm" (ngSubmit)="onSubmitEmail(emailForm.value)">
+
+  <div fxLayout="column" fxLayoutGap="20px">
+
+    <div class="bx--form-item" fxLayout="column">
+
+      <ibm-label [helperText]="emailInput.helperText" [invalid]="emailInput.invalid"
+        [invalidText]="emailInput.invalidText">
+        {{emailInput.label}}
+        <input ibmText formControlName="email" id="email" type="email" [invalid]="emailInput.invalid"
+          [disabled]="emailInput.disabled" [theme]="emailInput.theme" [placeholder]="emailInput.placeholder"
+          [autocomplete]="emailInput.autocomplete">
+      </ibm-label>
+
+    </div>
+
+    <div class="bx--form-item">
+      <button class="bx--btn bx--btn--primary" type="button" type="submit">Continue</button>
+    </div>
+
+    <fieldset class="bx--fieldset">
+      <ibm-checkbox (change)="onRememberMe($event)">
+        Remember Me
+      </ibm-checkbox>
+    </fieldset>
+
+  </div>
+
+</form>
+
+<form [fxHide]='hidePasswordForm' [formGroup]="passwordForm" (ngSubmit)="onSubmitPassword(passwordForm.value)">
+
+  <div fxLayout="column" fxLayoutGap="20px">
+
+    <div class="bx--form-item">
+      <label for="password" class="bx--label">Password</label>
+      <input #password formControlName="password" id="password" type="password" class="bx--text-input" placeholder="Password">
+    </div>
+
+    <div class="bx--form-item" *ngIf="!loginAttemptInProgress; else loginAttemptBlock">
+      <button class="bx--btn bx--btn--primary" type="button" type="submit">Log in</button>
+    </div>
+
+    <div class="bx--form-item">
+      <a href="#" ibmLink>forgot password?</a>
+    </div>
+
+    <ng-template #loginAttemptBlock>
+      <ibm-loading size="sm"></ibm-loading>
+    </ng-template>
+
+  </div>
+
+</form>
