@@ -1,7 +1,13 @@
-import { Component, OnInit, HostBinding, NgZone, ViewChild, ElementRef } from '@angular/core'
+import {
+  Component,
+  OnInit,
+  HostBinding,
+  ViewChild,
+  ElementRef,
+} from '@angular/core'
 import { FormBuilder, FormGroup } from '@angular/forms'
 import { AuthService } from '../../../shared/services/auth.service'
-import { ActivatedRoute, Router } from '@angular/router'
+import { Router } from '@angular/router'
 import { ICarbonInput, CarbonInput } from '../../../shared/models/forms.model'
 import { LodashService } from 'src/app/shared/services/lodash.service '
 
@@ -16,10 +22,9 @@ interface IPasswordForm {
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
-
   public hidePasswordForm = true
   public loginAttemptInProgress = false
   public loginErrorNotification: {
@@ -37,31 +42,26 @@ export class LoginComponent implements OnInit {
 
   constructor(
     public authService: AuthService,
-    private route: ActivatedRoute,
     private formBuilder: FormBuilder,
-    private ngZone: NgZone,
     private _: LodashService,
     private router: Router
   ) {
-
     this.initFormControls()
-
   }
 
   @HostBinding('attr.class') cls = 'flex-fill'
   @ViewChild('password') passwordElement: ElementRef
 
   ngOnInit() {
-
     // check if firebase user exists
-    if (!this._._.isEmpty(this._._.get(this.authService, 'auth.auth.currentUser'))) {
+    if (
+      !this._._.isEmpty(this._._.get(this.authService, 'auth.auth.currentUser'))
+    ) {
       this.redirect()
     }
-
   }
 
   initFormControls() {
-
     this.emailForm = this.formBuilder.group({
       email: '',
     })
@@ -69,11 +69,10 @@ export class LoginComponent implements OnInit {
     this.emailInput = new CarbonInput('Email', 'you@domain.com').model
 
     this.passwordForm = this.formBuilder.group({
-      password: ''
+      password: '',
     })
 
     this.passwordInput = new CarbonInput('Password', '').model
-
   }
 
   onRememberMe(event) {
@@ -82,7 +81,6 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmitEmail(formData: IEmailForm) {
-
     this.email = formData.email.trim().toLocaleLowerCase()
 
     if (this.validateEmail(this.email)) {
@@ -95,13 +93,11 @@ export class LoginComponent implements OnInit {
       setTimeout(() => {
         this.passwordElement.nativeElement.focus()
         this.passwordElement.nativeElement.select()
-      }, 0);
-
+      }, 0)
     } else {
       this.emailInput.invalid = true
       this.emailInput.invalidText = 'Invalid email format'
     }
-
   }
 
   validateEmail(email: string): boolean {
@@ -110,45 +106,42 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmitPassword(formData: IPasswordForm) {
-
     this.loginAttemptInProgress = true
 
     // console.log('formData', formData)
 
-    this.authService.signInEmailPassword(this.email, formData.password, this.rememberMe)
-      .then(() => {
+    this.authService
+      .signInEmailPassword(this.email, formData.password, this.rememberMe)
+      .then(
+        () => {
+          this.redirect()
 
-        this.redirect()
+          // this.EmailForm.reset()
+          // this.loginAttemptInProgress = false
+          // this.showPasswordBlock = false
+        },
+        (errorMsg) => {
+          this.loginAttemptInProgress = false
+          this.hidePasswordForm = true
 
-        // this.EmailForm.reset()
-        // this.loginAttemptInProgress = false
-        // this.showPasswordBlock = false
+          this.loginErrorNotification = {
+            type: 'error',
+            title: 'Login failed',
+            showClose: false,
+            message: errorMsg,
+          }
 
-      }, (errorMsg) => {
+          this.emailInput.invalid = !!this.loginErrorNotification
+          this.emailInput.invalidText = this.loginErrorNotification.message
 
-        this.loginAttemptInProgress = false
-        this.hidePasswordForm = true
-
-        this.loginErrorNotification = {
-          type: 'error',
-          title: 'Login failed',
-          showClose: false,
-          message: errorMsg
+          // clear password field on error
+          this.passwordForm.get('password').reset()
         }
-
-        this.emailInput.invalid = !!this.loginErrorNotification
-        this.emailInput.invalidText = this.loginErrorNotification.message
-
-        // clear password field on error
-        this.passwordForm.get('password').reset()
-
-      })
-
+      )
   }
 
   redirect() {
-    // user already logged in so redirect      
+    // user already logged in so redirect
     this.router.navigate(['/secure'])
   }
-
 }

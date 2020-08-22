@@ -3,6 +3,7 @@ import { Config } from './config'
 
 import './controller/live.controller'
 import './controller/pokemon.controller'
+import './controller/user.controller'
 
 import { customResponseHandler } from './middleware/response'
 

@@ -3,7 +3,7 @@ import {
   HttpRequest,
   HttpHandler,
   HttpEvent,
-  HttpInterceptor
+  HttpInterceptor,
 } from '@angular/common/http'
 import { AngularFireAuth } from '@angular/fire/auth'
 import { Observable, from } from 'rxjs'
@@ -15,17 +15,15 @@ export class AuthInterceptor implements HttpInterceptor {
     request: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-    return from(async () => {
-      return await (await this.auth.auth.currentUser).getIdToken(
-        /* forceRefresh */ true
-      )
-    }).pipe(
-      switchMap(idToken => {
+    return from(
+      this.auth.auth.currentUser.getIdToken(/* forceRefresh */ true)
+    ).pipe(
+      switchMap((idToken) => {
         request = request.clone({
           setHeaders: {
             'X-auth': idToken,
-            'Content-Type': 'application/json; charset=utf-8'
-          }
+            'Content-Type': 'application/json; charset=utf-8',
+          },
         })
         return next.handle(request)
       })

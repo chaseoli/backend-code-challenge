@@ -15,9 +15,14 @@ export interface IEnv extends ISecrets, IDevSecrets {
 
   port?: string
 
-  cicd: 'local' | 'githubaction' // used by tests too
+  // used by tests 
+  cicd: 'local' | 'githubaction' 
 
   gcp_project_number: string
+
+  GOOGLE_APPLICATION_CREDENTIALS: string
+  firebase_database_url: string
+
 }
 
 interface IDevSecrets {
@@ -34,4 +39,5 @@ export interface IGlobal {
   mongoClient: MongoClient
   database_started: boolean
   secrets_loaded: boolean
+  initialized_firebase: boolean
 }

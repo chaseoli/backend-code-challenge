@@ -6,6 +6,7 @@ import * as bodyParser from 'body-parser'
 import _ from 'lodash'
 import { loadSecrets } from './middleware/secret-manager'
 import { startMongo } from './database'
+import admin from 'firebase-admin'
 
 declare var process: {
   env: IEnv
@@ -31,12 +32,31 @@ export class Config {
     // enable all origins:
     this.app.use(cors())
 
-    // async loading (eg: load secrets and start db) after first request in middleware
-    // this way we only get the secrets when needed after runtime
-    // NOTE: we don't retrieve at run time because if we did we
-    // would slow the cold start time and slow the build since the
-    // app would have to wait to get secrets before booting up completely
+    // initialize managed services
+    this.startServices()
+
+    // parse application/x-www-form-urlencoded
+    this.app.use(bodyParser.urlencoded({ extended: false }))
+
+    // parse application/json
+    this.app.use(bodyParser.json())
+  }
+
+  start() {
+    // start server and listen on port
+    const port = process.env.port || 8080
+    this.app.listen(port, () => {
+      console.log(`App listening on port ${port}`)
+    })
+  }
+
+  private async startServices() {
     this.app.use(async (req, res, next) => {
+      // async loading (eg: load secrets and start db) after first request in middleware
+      // this way we only get the secrets when needed after runtime
+      // NOTE: we don't retrieve at run time because if we did we
+      // would slow the cold start time and slow the build since the
+      // app would have to wait to get secrets before booting up completely
       const secretsLoaded = _.get(global, 'secrets_loaded', false)
       // get container secrets from secret manager
       if (!secretsLoaded && process.env.build === 'prod') {
@@ -55,21 +75,23 @@ export class Config {
         await startMongo()
       }
 
+      const firebaseInitialized = _.get(global, 'initialized_firebase', false)
+      if (!firebaseInitialized) {
+        // update global value denoting that firebase is initialized
+        _.set(global, 'initialized_firebase', true)
+
+        // initialize firebase app
+        // https://cloud.google.com/docs/authentication/production#providing_credentials_to_your_application
+        // https://firebase.google.com/docs/admin/setup#add_firebase_to_your_app
+        console.log(process.env.GOOGLE_APPLICATION_CREDENTIALS)
+
+        admin.initializeApp({
+          credential: admin.credential.applicationDefault(),
+          databaseURL: process.env.firebase_database_url,
+        })
+      }
+
       next()
-    })
-
-    // parse application/x-www-form-urlencoded
-    this.app.use(bodyParser.urlencoded({ extended: false }))
-
-    // parse application/json
-    this.app.use(bodyParser.json())
-  }
-
-  start() {
-    // start server and listen on port
-    const port = process.env.port || 8080
-    this.app.listen(port, () => {
-      console.log(`App listening on port ${port}`)
     })
   }
 

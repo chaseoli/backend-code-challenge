@@ -5,6 +5,13 @@ import * as express from 'express'
 import * as _ from 'lodash'
 import { AuthenticationError } from '../err'
 import admin from 'firebase-admin'
+import { IEnv, IGlobal } from '../models/env.type'
+
+declare var process: {
+  env: IEnv
+}
+
+declare var global: IGlobal
 
 export async function expressAuthentication(
   request: express.Request,

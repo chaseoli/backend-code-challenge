@@ -17,8 +17,8 @@ import { OnDestroy } from '@angular/core'
 import { Subject, timer, Subscription, Observable } from 'rxjs'
 import { takeUntil, take } from 'rxjs/operators'
 import { WindowService } from './window.service'
-import { IPerson } from '../../../../../api/src/models/profile.type'
 import { UserService } from './user.service'
+import { IPerson } from '../../../../../api/src/models/profile.type'
 
 @Injectable()
 export class AuthService implements OnDestroy {
@@ -80,11 +80,15 @@ export class AuthService implements OnDestroy {
         console.log('Registered: ', userCredential.user.email)
 
         // create the user in mongo. Usually you would want to do
-        // this on the server side. However, this is fine to do on 
-        // the client side since there is no significant security 
+        // this on the server side. However, this is fine to do on
+        // the client side since there is no significant security
         // threat given that the user has to be authenticated to the
-        // api server to create the user record for themselves. 
-        await this.userService.registerUser(userCredential)
+        // api server to create the user record for themselves.
+        const person: IPerson = {
+          uid: userCredential.user.uid,
+          email: userCredential.user.email,
+        }
+        await this.userService.update(person).toPromise()
 
         return
       },

@@ -8,6 +8,7 @@ import { AuthService } from '../services/auth.service';
 import { AuthCanActivateGuard, AuthRedirectCookie } from '../guards/auth.guard';
 import { AuthResolver } from '../guards/auth.resolver';
 import { ModalModule, PlaceholderModule } from 'carbon-components-angular';
+import { UserService } from '../services/user.service';
 
 /**
  * This shared module is used to import components and services related to managing users
@@ -30,6 +31,7 @@ import { ModalModule, PlaceholderModule } from 'carbon-components-angular';
         AuthCanActivateGuard,
         AuthRedirectCookie,
         AuthResolver,
+        UserService
     ]
 })
 export class AuthModule { }

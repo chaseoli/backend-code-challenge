@@ -49,7 +49,7 @@ testem.log
 Thumbs.db
 
 # Secrets
-.secrets/**/*
+**/.secrets/**/*
 *.env
 
 # Temp Firebase
