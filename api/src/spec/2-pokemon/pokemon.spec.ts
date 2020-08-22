@@ -146,20 +146,33 @@ describe('pokemon data', () => {
     }
   })
 
-  it('should mark favorites', async () => {
-    
+  it('should paginate results', async () => {
+    try {
+      const startAtIdx = 10
+      const take = 5
+      const p = await db.filterAll(startAtIdx + take, startAtIdx)
+      expect(p).to.be.an('array')
+      expect(p.length).to.be.equal(5)
+      expect(p[2].name).to.be.equal('Weedle')
+    } catch (error) {
+      expect(error).to.be.null
+    }
   })
 
-  it('should get all favorites', async () => {
+  it('should perform advanced query results', async () => {
+    try {
+      const favorites = ['001', '009', '012', '015', '069']
+      const startsWith = 'b'
+      const types = ['Poison', 'Bug', 'Water']
+      const limit = 10
+      const skip = 3
 
+      const p = await db.filterAll(limit, skip, startsWith, types, favorites)
+      expect(p).to.be.an('array')
+      expect(p.length).to.be.equal(2)
+      expect(p[1].name).to.be.equal('Bellsprout')
+    } catch (error) {
+      expect(error).to.be.null
+    }
   })
-
-  it('should un-mark favorites', async () => {
-
-  })
-
-  it('should get paginated results for max qty', async () => {
-
-  })
-
 })

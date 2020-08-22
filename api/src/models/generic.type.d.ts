@@ -9,7 +9,7 @@ export interface IGenericSuccessResponse extends IGenericHttpResponse {
 }
 
 export interface IGenericErrorResponse extends IGenericHttpResponse {
-  errorMessage: string // 
+  errorMessage: string //
   errorId?: string // used to look up confidential error details in logs
   errorDetails?: any
 }

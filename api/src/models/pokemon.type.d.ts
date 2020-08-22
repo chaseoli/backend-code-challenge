@@ -42,3 +42,8 @@ interface IPokemonTextSearch {
   match: IPokemon
   options: IPokemon[]
 }
+
+export interface IPokemonComplexQuery {
+  types?: string[]
+  favorites?: string[]
+}

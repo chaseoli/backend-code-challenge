@@ -1,5 +1,9 @@
 import { Route, Controller, OperationId, Post, Body, Get, Query } from 'tsoa'
-import { IPokemon, IPokemonTextSearch } from '../models/pokemon.type'
+import {
+  IPokemon,
+  IPokemonTextSearch,
+  IPokemonComplexQuery,
+} from '../models/pokemon.type'
 import { PokemonContext } from '../context/pokemon.context'
 import { PokemonError } from '../err'
 import {
@@ -89,19 +93,32 @@ export class PokemonController extends Controller {
     }
   }
 
-  @Get()
+  @Get('complex/{startAtIdx}/{take}')
   @OperationId('pokemonQuery')
-  public async query(
-    @Query() name: string,
-    @Query() type: string,
-    @Query() favorite: boolean,
-    @Query() start: string,
-    @Query() end: string
+  public async complex(
+    startAtIdx: number,
+    take: number,
+    @Body() body: IPokemonComplexQuery,
+    @Query() name?: string
   ) {
     try {
-      // TODO: ...
+      return await this.pokemon.filterAll(
+        startAtIdx + take,
+        startAtIdx,
+        name,
+        body.types,
+        body.favorites
+      )
     } catch (error) {
-      // TODO: ...
+      const e = new PokemonError(
+        'failed to perform complex query on pokemon from database',
+        error
+      )
+      this.setStatus(400)
+      return {
+        errorMessage: e.message,
+        errorId: e.id,
+      }
     }
   }
 }

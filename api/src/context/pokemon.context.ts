@@ -64,6 +64,68 @@ export class PokemonContext {
     return types
   }
 
+  async filterAll(
+    limit: number,
+    skip: number,
+    name?: string,
+    types?: string[],
+    favoritesArray?: string[]
+  ): Promise<IPokemon[]> {
+    let query = []
+
+    // only select from user's favorites
+    if (favoritesArray) {
+      if (favoritesArray.length > 0) {
+        query.push({
+          $match: {
+            id: {
+              $in: favoritesArray,
+            },
+          },
+        })
+      }
+    }
+
+    // sort by id to ensure order
+    query.push({
+      $sort: {
+        id: 1,
+      },
+    })
+
+    // filter by exact or approximate names
+    if (name) {
+      query.push({
+        $match: {
+          name: new RegExp(name, 'i'),
+        },
+      })
+    }
+
+    // filter by exact type
+    if (types) {
+      query.push({
+        $match: {
+          types: {
+            $in: types,
+          },
+        },
+      })
+    }
+
+    // paginate by 'limiting' results and thereafter 'skipping' previously retrieved results
+    query.push({
+      $limit: limit,
+    })
+    query.push({
+      $skip: skip,
+    })
+
+    const cursor = this.db.aggregate(query)
+    const results = await cursor.toArray()
+    return results
+  }
+
   /**
    * Query list of pokemon types
    *
@@ -89,13 +151,13 @@ export class PokemonContext {
     return
   }
 
-  async createTextSearchIndex() {
-    await this.db.createIndex({ name: 'text' })
-    return
-  }
+  // async createTextSearchIndex() {
+  //   await this.db.createIndex({ name: 'text' })
+  //   return
+  // }
 
-  async createUniqueIdIndex() {
-    await this.db.createIndex({ id: 1 }, { unique: true })
-    return
-  }
+  // async createUniqueIdIndex() {
+  //   await this.db.createIndex({ id: 1 }, { unique: true })
+  //   return
+  // }
 }

@@ -60,4 +60,16 @@ describe('user management', () => {
     await db.delete(testUid)
   })
 
+  it('should mark favorite pokemon for user', async () => {
+    
+  })
+
+  it('should get all favorite pokemon user', async () => {
+
+  })
+
+  it('should un-mark favorite pokemon for user', async () => {
+
+  })
+
 })
