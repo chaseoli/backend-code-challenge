@@ -83,7 +83,7 @@ export class Config {
         // initialize firebase app
         // https://cloud.google.com/docs/authentication/production#providing_credentials_to_your_application
         // https://firebase.google.com/docs/admin/setup#add_firebase_to_your_app
-        console.log(process.env.GOOGLE_APPLICATION_CREDENTIALS)
+        // console.log(process.env.GOOGLE_APPLICATION_CREDENTIALS)
 
         admin.initializeApp({
           credential: admin.credential.applicationDefault(),

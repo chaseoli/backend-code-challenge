@@ -11,7 +11,10 @@ export const startMongo = async () => {
     // Set the poolSize to 50 connections.
     // TODO: Timeouts
     // Set the write timeout limit to 2500 milliseconds.
-    { useNewUrlParser: true }
+    {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    }
   )
   client.catch((err) => {
     // log the error
