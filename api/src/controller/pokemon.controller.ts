@@ -100,7 +100,7 @@ export class PokemonController extends Controller {
     take: number,
     @Body() body: IPokemonComplexQuery,
     @Query() name?: string
-  ) {
+  ) :Promise<IPokemon[] | IGenericErrorResponse> {
     try {
       return await this.pokemon.filterAll(
         startAtIdx + take,
@@ -121,4 +121,29 @@ export class PokemonController extends Controller {
       }
     }
   }
+
+  @Post('favorite/{pokemonId}/{isFavorite}')
+  @OperationId('pokemonQuery')
+  public async favorite(
+    pokemonId: string,
+    isFavorite: 0 | 1,
+  ): Promise<void | IGenericErrorResponse> {
+    try {
+      await 
+     return
+      )
+    } catch (error) {
+      const e = new PokemonError(
+        'failed to perform complex query on pokemon from database',
+        error
+      )
+      this.setStatus(400)
+      return {
+        errorMessage: e.message,
+        errorId: e.id,
+      }
+    }
+  }
+
+
 }

@@ -1,5 +1,6 @@
 import { IPokemon, IPokemonTextSearch } from '../models/pokemon.type'
 import { IGlobal } from '../models/env.type'
+// import { IPerson } from '../models/profile.type'
 declare var global: IGlobal
 
 export class PokemonContext {
@@ -69,17 +70,17 @@ export class PokemonContext {
     skip: number,
     name?: string,
     types?: string[],
-    favoritesArray?: string[]
+    favoritesIdArray?: string[]
   ): Promise<IPokemon[]> {
     let query = []
 
     // only select from user's favorites
-    if (favoritesArray) {
-      if (favoritesArray.length > 0) {
+    if (favoritesIdArray) {
+      if (favoritesIdArray.length > 0) {
         query.push({
           $match: {
             id: {
-              $in: favoritesArray,
+              $in: favoritesIdArray,
             },
           },
         })
@@ -133,21 +134,50 @@ export class PokemonContext {
    * @return {*}  {Promise<IPokemon[]>}
    * @memberof PokemonContext
    */
-  async getFavorites(id: string): Promise<IPokemon[]> {
-    // TODO: ...
-    return []
+  async getFavorites(favoritesIdArray: string[]): Promise<IPokemon[]> {
+    const cursor = this.db.aggregate([
+      {
+        $match: {
+          id: {
+            $in: favoritesIdArray,
+          },
+        },
+      },
+    ])
+    return await cursor.toArray()
   }
 
+
   /**
-   * Mutation to mark/unmark pokemon as favorite
+   * Mark pokemon as favorite for user
    *
-   * @param {string} id
+   * @param {string} uid
+   * @param {string} pokemonId
    * @param {boolean} isFavorite
    * @return {*}  {Promise<void>}
    * @memberof PokemonContext
    */
-  async updateFavorite(id: string, isFavorite: boolean): Promise<void> {
-    // TODO: ...
+  async updateFavorite(
+    uid: string,
+    pokemonId: string,
+    isFavorite: boolean
+  ): Promise<void> {
+    if (isFavorite) {
+      // add to favorites
+      await this.db.update(
+        { uid: uid },
+        // { pokemonId: pokemonId } might seem odd, but this is a trick
+        // for marking favorites at scale.
+        // See discussion at "../models/profile.type", pokemon_favorites
+        { $set: { [pokemonId]: pokemonId } }
+      )
+    } else {
+      // remove from favorites
+      await this.db.update(
+        { uid: uid },        
+        { $unset: { [pokemonId]: '' } }
+      )
+    }
     return
   }
 
