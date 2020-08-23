@@ -14,7 +14,7 @@ import {
   IGenericErrorResponse,
 } from '../models/generic.type'
 import { UserContext } from '../context/user.context'
-import { IPerson, IRequestUser } from '../models/profile.type'
+import { IPerson, IRequestUser } from '../models/user.type'
 
 @Route('user')
 export class UserController extends Controller {

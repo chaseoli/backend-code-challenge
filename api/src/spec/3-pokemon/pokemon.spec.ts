@@ -3,6 +3,8 @@ import { expect } from 'chai'
 import { Db } from 'mongodb'
 import { IGlobal } from '../../models/env.type'
 import { PokemonContext } from '../../context/pokemon.context'
+import { testUid } from '../test.constants'
+import { DATABASE, POKEMON_COLLECTION } from '../../constants/db.constants'
 
 declare var global: IGlobal
 
@@ -11,7 +13,7 @@ describe('pokemon data', () => {
   let database: Db
   before(async () => {
     // set on global object
-    database = global.mongoClient.db('quantum_pokemon')
+    database = global.mongoClient.db(DATABASE)
     db = new PokemonContext()
   })
 
@@ -19,7 +21,7 @@ describe('pokemon data', () => {
     try {
       const collections = await database.listCollections().toArray()
       const actualCollectionNames = collections.map((obj) => obj.name)
-      const expectedCollectionNames = ['pokemon']
+      const expectedCollectionNames = [POKEMON_COLLECTION]
       expectedCollectionNames.map((collection) => {
         expect(actualCollectionNames).to.contain(collection)
       })
@@ -30,10 +32,10 @@ describe('pokemon data', () => {
 
   it('database should have a specific amount of records', async () => {
     try {
-      const movies = database.collection('pokemon')
+      const collection = database.collection('pokemon')
 
-      const numMoves = await movies.countDocuments({})
-      expect(numMoves).to.be.equal(151)
+      const num = await collection.countDocuments({})
+      expect(num).to.be.equal(151)
     } catch (e) {
       expect(e).to.be.null
     }
@@ -111,7 +113,7 @@ describe('pokemon data', () => {
     try {
       const p = await db.getByName('wee')
       expect(p.options.length).to.be.equal(3)
-      expect(p.match).to.be.empty
+      expect(p.match).to.be.null
       expect(p.options[2].id).to.be.equal('110')
     } catch (error) {
       expect(error).to.be.null
@@ -171,6 +173,63 @@ describe('pokemon data', () => {
       expect(p).to.be.an('array')
       expect(p.length).to.be.equal(2)
       expect(p[1].name).to.be.equal('Bellsprout')
+    } catch (error) {
+      expect(error).to.be.null
+    }
+  })
+
+  const favoritesIdArr = ['013', '045', '023', '083']
+  it('should mark favorite pokemon for user', async () => {
+    try {
+      const promiseArr = []
+
+      for (const i of favoritesIdArr) {
+        // add favorites one at a time to user
+        promiseArr.push(db.updateFavorite(testUid, i, true))
+      }
+
+      // execute writes in parallel
+      await Promise.all(promiseArr)
+    } catch (error) {
+      expect(error).to.be.null
+    }
+  })
+
+  it('should get all favorite pokemon user', async () => {
+    try {
+      // get favorite pokemon for a user
+      const favorites = await db.getFavorites(testUid)
+      for (const i of favorites) {
+        // expect the pokemon id to be included in the favorites array
+        expect(favoritesIdArr).to.contain(i.id)
+      }
+    } catch (error) {
+      expect(error).to.be.null
+    }
+  })
+
+  it('should un-mark favorite pokemon for user', async () => {
+    try {
+      const promiseArr = []
+
+      for (const i of favoritesIdArr) {
+        // remove favorites one at a time to user
+        promiseArr.push(db.updateFavorite(testUid, i, false))
+      }
+
+      // execute writes in parallel
+      await Promise.all(promiseArr)
+    } catch (error) {
+      expect(error).to.be.null
+    }
+  })
+
+  it('should not contain any favorite pokemon', async () => {
+    try {
+      // get favorite pokemon for a user
+      const favorites = await db.getFavorites(testUid)
+      expect(favorites).to.be.an('array')
+      expect(favorites.length).to.be.equal(0)
     } catch (error) {
       expect(error).to.be.null
     }

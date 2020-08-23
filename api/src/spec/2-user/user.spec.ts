@@ -1,26 +1,27 @@
 import { describe, it } from 'mocha'
 import { expect } from 'chai'
-import { Db } from 'mongodb'
 import { IGlobal } from '../../models/env.type'
+import { IPerson } from '../../models/user.type'
 import { UserContext } from '../../context/user.context'
-import { IPerson } from '../../models/profile.type'
+import { testUid, testEmail } from '../test.constants'
+import {DATABASE, USER_COLLECTION} from '../../constants/db.constants'
 
 declare var global: IGlobal
 
 describe('user management', () => {
   let db: UserContext
-  let database: Db
   before(async () => {
-    // set on global object
-    database = global.mongoClient.db('quantum_pokemon')
     db = new UserContext()
   })
 
   it('database should have the user collection', async () => {
     try {
-      const collections = await database.listCollections().toArray()
+      const collections = await global.mongoClient
+        .db(DATABASE)
+        .listCollections()
+        .toArray()
       const actualCollectionNames = collections.map((obj) => obj.name)
-      const expectedCollectionNames = ['users']
+      const expectedCollectionNames = [USER_COLLECTION]
       expectedCollectionNames.map((collection) => {
         expect(actualCollectionNames).to.contain(collection)
       })
@@ -29,8 +30,7 @@ describe('user management', () => {
     }
   })
 
-  const testUid = 'someTestUid'
-  const testEmail = 'testemail@somecompany.com'
+
   it('should create a new user', async () => {
     try {
       const person: IPerson = {
@@ -54,22 +54,6 @@ describe('user management', () => {
     } catch (error) {
       expect(error).to.be.null
     }
-  })
-
-  after(async ()=>{
-    await db.delete(testUid)
-  })
-
-  it('should mark favorite pokemon for user', async () => {
-    
-  })
-
-  it('should get all favorite pokemon user', async () => {
-
-  })
-
-  it('should un-mark favorite pokemon for user', async () => {
-
   })
 
 })

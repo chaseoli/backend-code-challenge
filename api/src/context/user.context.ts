@@ -1,9 +1,10 @@
 import { IGlobal } from '../models/env.type'
-import { IPerson } from '../models/profile.type'
+import { IPerson } from '../models/user.type'
+import { DATABASE, USER_COLLECTION } from '../constants/db.constants'
 declare var global: IGlobal
 
 export class UserContext {
-  private db = global.mongoClient.db('quantum_pokemon').collection('users')
+  private db = global.mongoClient.db(DATABASE).collection(USER_COLLECTION)
 
   /**
    * Gets a user by their firebase uid
