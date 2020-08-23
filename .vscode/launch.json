@@ -24,6 +24,27 @@
       "envFile": "${workspaceFolder}/api/dev.env"
     },
     {
+      "name": "debug ./api using dotenv",
+      "type": "node",
+      "runtimeExecutable": "node",
+      "request": "launch",
+      "protocol": "inspector",
+      "runtimeArgs": ["--nolazy", "--inspect-brk=5858"],
+      "timeout": 30000,
+      "port": 5858,
+      "sourceMaps": true,
+      "preLaunchTask": "ts-dev-client",
+      "program": "${workspaceFolder}/api/src/app.ts",
+      "console": "integratedTerminal",
+      "internalConsoleOptions": "neverOpen",
+      "localRoot": "${workspaceRoot}",
+      "outFiles": ["${workspaceRoot}/api/lib/**/*.js"],
+      "env": {
+        "build": "dev",
+        "cicd": "githubaction"
+      }
+    },
+    {
       // Attach to running API locally (ie: $ bash api/debug-dev.bash)
       "name": "attach ./api",
       "type": "node",

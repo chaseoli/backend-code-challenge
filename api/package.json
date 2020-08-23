@@ -10,14 +10,17 @@
     "start": "sh scripts/build.sh && sh scripts/start-dev.sh",
     "start-debug": "sh scripts/build.sh && sh scripts/start-debug.sh",
     "start-docker": "node lib/app.js",
-    "test": "mocha --require ts-node/register --timeout 999999 --colors --exit src/spec/**/*.spec.ts",
+    "test": "sh scripts/tests.sh",
     "deploy-prod": "bash deploy-api.bash -i -e prod",
-    "deploy-dev": "bash deploy-api.bash -i -e dev"
+    "deploy-dev": "bash deploy-api.bash -i -e dev",
+    "encrypt-secrets": "sh scripts/encrypt-secrets.sh",
+    "decrypt-secrets": "sh scripts/decrypt-secrets.sh"
   },
   "dependencies": {
     "body-parser": "^1.18.3",
     "cookie-parser": "^1.4.3",
     "cors": "^2.8.4",
+    "dotenv": "^8.2.0",
     "express": "^4.16.3",
     "express-session": "^1.15.6",
     "firebase-admin": "^9.1.1",

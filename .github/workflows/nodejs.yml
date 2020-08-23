@@ -1,0 +1,60 @@
+# TODO: add deployment workflow, examples
+# https://github.com/GoogleCloudPlatform/github-actions/blob/master/example-workflows/gae/.github/workflows/app-engine.yml
+# https://github.com/marketplace/actions/setup-gcloud-environment
+
+name: Run build -> tests -> deployments
+
+on:
+  # Trigger the workflow on push or pull request,
+  # but only for the master branch
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        # node-version: [8.x, 10.x, 12.x]
+        node-version: [12.x]
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      #  all installs
+      - name: install deps for ./pokemon-app
+        run: npm install
+        working-directory: ./pokemon-app
+      - name: install deps for ./api
+        run: npm install
+        working-directory: ./api
+
+      # server API
+      # - name: build server
+      #   run: npm run build --if-present
+      #   working-directory: ./api
+      - name: tests server
+        run: npm run decrypt-secrets && npm test
+        working-directory: ./api
+        env:
+          cicd: githubaction
+          GOOGLE_APPLICATION_CREDENTIALS: ./test-service-account.json
+          portal_url: http://localhost:4200
+          port: 8080
+          gcp_project_id: beskar-6c22
+
+      # web ui
+      # NOTE: Run this last since it takes the longest
+      - name: build portal
+        run: npm run build --if-present
+        working-directory: ./app-pokemon
+    # https://intuit.github.io/auto/pages/getting-started.html
