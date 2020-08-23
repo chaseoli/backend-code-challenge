@@ -1,4 +1,4 @@
-TODO: Add Travis build badge
+![https://github.com/chaseoli/backend-code-challenge/actions](https://github.com/chaseoli/backend-code-challenge/workflows/.github/workflows/nodejs.yml/badge.svg)
 
 # Test for Dream Job on Quantum Team
 

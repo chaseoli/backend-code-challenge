@@ -2,7 +2,7 @@
 # https://github.com/GoogleCloudPlatform/github-actions/blob/master/example-workflows/gae/.github/workflows/app-engine.yml
 # https://github.com/marketplace/actions/setup-gcloud-environment
 
-name: Run build -> tests -> deployments
+name: build
 
 on:
   # Trigger the workflow on push or pull request,
@@ -43,6 +43,8 @@ jobs:
       #   run: npm run build --if-present
       #   working-directory: ./api
       - name: tests server
+        env:
+          POKEMON_PASSPHRASE: ${{ secrets.POKEMON_PASSPHRASE }}
         run: npm run decrypt-secrets && npm test
         working-directory: ./api
         env:
