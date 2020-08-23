@@ -1,0 +1,47 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "copy-contract-artifacts",
+      "type": "shell",
+      "command": ["mkdir -p api/build/contracts ; cp -rf eth/build/contracts/ api/build/contracts/src"]
+    },
+    {
+      "type": "typescript",
+      "label": "ts-dev-client",
+      "tsconfig": "api/tsconfig.dev.json",
+      "problemMatcher": [
+        "$tsc"
+      ],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      }, 
+      "dependsOn":[
+        "tsoa-yaml2json",
+        "tsoa-spec-client",
+        "tsoa-routes-client"
+      ]
+    },
+    {
+      "label": "tsoa-yaml2json",
+      "type": "shell",
+      "command": ["js-yaml api/tsoa.yml > api/tsoa.json"]
+    },
+    {
+      "label": "tsoa-routes-client",
+      "type": "shell",
+      "command": ["cd api ; tsoa routes ; cd ../.."]
+    },
+    {
+      "label": "tsoa-spec-client",
+      "type": "shell",
+      "command": ["cd api ; tsoa spec ; cd ../.."]
+    },
+    {
+      "label": "install_all_dependencies",
+      "type": "shell",
+      "command": ["npm i ; cd web ; npm i ; cd api ; npm i"]
+    }
+  ]
+}

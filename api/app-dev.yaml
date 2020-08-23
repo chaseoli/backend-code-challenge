@@ -1,0 +1,24 @@
+# app.yaml reference
+# https://cloud.google.com/appengine/docs/flexible/nodejs/reference/app-yaml
+
+# multiple deployment configs:
+# https://cloud.google.com/appengine/docs/flexible/nodejs/configuring-your-app-with-app-yaml
+
+# Flexible Environment:
+# https://cloud.google.com/appengine/docs/flexible/nodejs/runtime
+# runtime: nodejs
+# env: flex
+# manual_scaling:
+#   instances: 1
+# resources:
+#   cpu: 1 # must be one or an even number between 2 and 96
+#   memory_gb: 0.5 # approximate minimum 0.5 
+#   disk_size_gb: 10 # minimum is 10 GB 
+
+# Standard Environment
+# https://cloud.google.com/appengine/docs/standard/nodejs/runtime
+runtime: nodejs10
+
+env_variables:
+  build: "prod" # prod because this is deployment
+  

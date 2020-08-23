@@ -1,0 +1,61 @@
+<div fxLayout="row" fxLayoutAlign="start stretch">
+  <div fxFlex fxLayout="column" fxLayoutAlign="start stretch">
+    <div
+      fxLayout="row"
+      fxLayoutAlign="end center"
+      fxLayoutGap="10px"
+      style="padding-right: 20px;"
+    >
+      <button ibmButton="ghost" [routerLink]="['/secure/wallet']">
+        <svg
+          icon
+          ibmIconIbmSecurity
+          size="20"
+          class="bx--overflow-menu__icon"
+        ></svg>
+      </button>
+
+      <span fxFlex></span>
+
+      <span *ngIf="sessionService.user?.email">{{
+        sessionService.user?.email
+      }}</span>
+
+      <app-switcher [flip]="true">
+        <ibm-overflow-menu-option
+          title="verify"
+          [routerLink]="['/secure/identity']"
+        >
+          Get Verified
+        </ibm-overflow-menu-option>
+        <ibm-overflow-menu-option
+          title="verify"
+          [routerLink]="['/secure/identity']"
+        >
+          Operations
+        </ibm-overflow-menu-option>
+        <ibm-overflow-menu-option
+          type="danger"
+          (click)="authService.signOut('/')"
+          title="logout"
+          >Logout
+        </ibm-overflow-menu-option>
+      </app-switcher>
+
+      <!-- <div fxLayout="column" fxLayoutAlign="center end" fxLayoutGap="5px">
+        <span>{{sessionService.user?.email}}</span>
+        <div fxLayout="row">
+          <ibm-code-snippet display="inline" theme="dark">{{sessionService.stellarAddress}}</ibm-code-snippet>
+        </div>
+      </div> -->
+    </div>
+
+    <router-outlet></router-outlet>
+
+    <span fxFlex></span>
+
+    <!-- <div class="terminal" *ngIf="showTerminal">
+      terminal here
+    </div> -->
+  </div>
+</div>

@@ -1,0 +1,23 @@
+<div [ibmOverflowMenu]="options" [ngClass]="{'bx--overflow-menu--open': open}" [attr.aria-label]="buttonLabel"
+    [flip]="flip" (onOpen)="open = true" (onClose)="open = false" role="button" aria-haspopup="true"
+    class="bx--overflow-menu" [placement]="placement" tabindex="0">
+    <!-- <svg focusable="false" class="bx--overflow-menu__icon" width="3" height="15" viewBox="0 0 3 15">
+        <g fill-rule="evenodd">
+            <circle cx="1.5" cy="1.5" r="1.5" />
+            <circle cx="1.5" cy="7.5" r="1.5" />
+            <circle cx="1.5" cy="13.5" r="1.5" />
+        </g>
+    </svg> -->
+    
+    <svg icon ibmIconUser size="20" class="bx--overflow-menu__icon"></svg> 
+
+    <!-- <svg focusable="false" class="bx--overflow-menu__icon" width="3" height="15" viewBox="0 0 3 15">
+        <path
+            d="M8 2c1.4 0 2.5 1.1 2.5 2.5S9.4 7 8 7 5.5 5.9 5.5 4.5 6.6 2 8 2M8 1C6.1 1 4.5 2.6 4.5 4.5S6.1 8 8 8s3.5-1.6 3.5-3.5S9.9 1 8 1zM13 15h-1v-2.5c0-1.4-1.1-2.5-2.5-2.5h-3C5.1 10 4 11.1 4 12.5V15H3v-2.5C3 10.6 4.6 9 6.5 9h3c1.9 0 3.5 1.6 3.5 3.5V15z">
+        </path>
+    </svg> -->
+
+</div>
+<ng-template #options>
+    <ng-content></ng-content>
+</ng-template>

@@ -1,0 +1,22 @@
+{
+  "name": "backend-code-challenge",
+  "version": "1.0.0",
+  "description": "Dream Job",
+  "main": "index.js",
+  "scripts": {
+    "start": "npm run start-api & npm run start-ui",
+    "start-api": "npm run --prefix api start",
+    "start-ui": "npm run --prefix pokemon-app start",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chaseoli/backend-code-challenge.git"
+  },
+  "author": "Chase Oliphant",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/chaseoli/backend-code-challenge/issues"
+  },
+  "homepage": "https://github.com/chaseoli/backend-code-challenge#readme"
+}
