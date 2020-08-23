@@ -31,9 +31,9 @@ jobs:
           node-version: ${{ matrix.node-version }}
 
       #  all installs
-      - name: install deps for ./pokemon-app
-        run: npm install
-        working-directory: ./pokemon-app
+      # - name: install deps for ./pokemon-app
+      #   run: npm install
+      #   working-directory: ./pokemon-app
       - name: install deps for ./api
         run: npm install
         working-directory: ./api
@@ -45,10 +45,12 @@ jobs:
       # This command is just an example to show your secret being printed
       # Ensure you remove any print statements of your secrets. GitHub does
       # not hide secrets that use this workaround.
+      - name: decrypt secrets
+        run: npm run decrypt-secrets
       - name: Test printing your secret (Remove this step in production)
         run: cat $HOME/secrets/dev.env
       - name: tests server
-        run: npm run decrypt-secrets && npm test
+        run: npm test
         working-directory: ./api
         env:
           POKEMON_PASSPHRASE: ${{ secrets.POKEMON_PASSPHRASE }}
