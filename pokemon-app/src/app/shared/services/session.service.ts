@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core'
 import { AuthService } from './auth.service'
-import { IPerson } from '../../../../../api/src/models/profile.type'
+import { IPerson } from '../../../../../api/src/models/user.type'
 import { LodashService } from 'src/app/shared/services/lodash.service '
 import { UserService } from './user.service'
 
 @Injectable()
 export class SessionService {
   user: IPerson
+  private init: boolean
 
   constructor(
     private db: UserService,
@@ -15,6 +16,7 @@ export class SessionService {
   ) {
     this.user = null
     this.getProfile()
+    this.init = false
   }
 
   async getProfile() {
@@ -24,7 +26,8 @@ export class SessionService {
           .getByUid(this.authService.auth.auth.currentUser.uid)
           .toPromise()
 
-        if (!person) {
+        if (!person && this.init === false) {
+          this.init = true // prevent additional requests (causing redundant load on API)
           // if user does not exist then auth service was unsuccessful at
           // creating the user profile when the user registered.
           // retry here...

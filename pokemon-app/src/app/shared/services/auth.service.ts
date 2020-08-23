@@ -18,7 +18,7 @@ import { Subject, timer, Subscription, Observable } from 'rxjs'
 import { takeUntil, take } from 'rxjs/operators'
 import { WindowService } from './window.service'
 import { UserService } from './user.service'
-import { IPerson } from '../../../../../api/src/models/profile.type'
+import { IPerson } from '../../../../../api/src/models/user.type'
 
 @Injectable()
 export class AuthService implements OnDestroy {

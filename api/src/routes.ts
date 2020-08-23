@@ -92,6 +92,15 @@ const models: TsoaRoute.Models = {
         "additionalProperties": true,
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "IPokemonComplexQuery": {
+        "dataType": "refObject",
+        "properties": {
+            "types": { "dataType": "array", "array": { "dataType": "string" } },
+            "favorites": { "dataType": "array", "array": { "dataType": "string" } },
+        },
+        "additionalProperties": true,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "IPersonProfile": {
         "dataType": "refObject",
         "properties": {
@@ -110,13 +119,20 @@ const models: TsoaRoute.Models = {
         "additionalProperties": true,
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "IPokemonFavorites": {
+        "dataType": "refObject",
+        "properties": {
+        },
+        "additionalProperties": { "dataType": "string" },
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "IPerson": {
         "dataType": "refObject",
         "properties": {
+            "pokemon_favorites": { "ref": "IPokemonFavorites" },
             "uid": { "dataType": "string", "required": true },
             "email": { "dataType": "string", "required": true },
             "profile": { "ref": "IPersonProfile" },
-            "pokemon_favorites": { "dataType": "array", "array": { "ref": "IEvolutions" } },
         },
         "additionalProperties": true,
     },
@@ -263,14 +279,13 @@ export function RegisterRoutes(app: express.Express) {
             promiseHandler(controller, promise, response, next);
         });
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    app.get('/pokemon',
+    app.post('/pokemon/complex/:startAtIdx/:take',
         function(request: any, response: any, next: any) {
             const args = {
-                name: { "in": "query", "name": "name", "required": true, "dataType": "string" },
-                type: { "in": "query", "name": "type", "required": true, "dataType": "string" },
-                favorite: { "in": "query", "name": "favorite", "required": true, "dataType": "boolean" },
-                start: { "in": "query", "name": "start", "required": true, "dataType": "string" },
-                end: { "in": "query", "name": "end", "required": true, "dataType": "string" },
+                startAtIdx: { "in": "path", "name": "startAtIdx", "required": true, "dataType": "double" },
+                take: { "in": "path", "name": "take", "required": true, "dataType": "double" },
+                body: { "in": "body", "name": "body", "required": true, "ref": "IPokemonComplexQuery" },
+                name: { "in": "query", "name": "name", "dataType": "string" },
             };
 
             // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
@@ -285,7 +300,55 @@ export function RegisterRoutes(app: express.Express) {
             const controller = new PokemonController();
 
 
-            const promise = controller.query.apply(controller, validatedArgs as any);
+            const promise = controller.complex.apply(controller, validatedArgs as any);
+            promiseHandler(controller, promise, response, next);
+        });
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    app.get('/pokemon/favorites',
+        authenticateMiddleware([{ "user": [] }]),
+        function(request: any, response: any, next: any) {
+            const args = {
+                request: { "in": "request", "name": "request", "required": true, "dataType": "object" },
+            };
+
+            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+            let validatedArgs: any[] = [];
+            try {
+                validatedArgs = getValidatedArgs(args, request, response);
+            } catch (err) {
+                return next(err);
+            }
+
+            const controller = new PokemonController();
+
+
+            const promise = controller.getFavorites.apply(controller, validatedArgs as any);
+            promiseHandler(controller, promise, response, next);
+        });
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    app.post('/pokemon/favorites/:pokemonId/:isFavorite',
+        authenticateMiddleware([{ "user": [] }]),
+        function(request: any, response: any, next: any) {
+            const args = {
+                request: { "in": "request", "name": "request", "required": true, "dataType": "object" },
+                pokemonId: { "in": "path", "name": "pokemonId", "required": true, "dataType": "string" },
+                isFavorite: { "in": "path", "name": "isFavorite", "required": true, "dataType": "union", "subSchemas": [{ "dataType": "enum", "enums": [0] }, { "dataType": "enum", "enums": [1] }] },
+            };
+
+            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+            let validatedArgs: any[] = [];
+            try {
+                validatedArgs = getValidatedArgs(args, request, response);
+            } catch (err) {
+                return next(err);
+            }
+
+            const controller = new PokemonController();
+
+
+            const promise = controller.favorite.apply(controller, validatedArgs as any);
             promiseHandler(controller, promise, response, next);
         });
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa

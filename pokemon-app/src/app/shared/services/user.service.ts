@@ -1,9 +1,7 @@
 import { Injectable } from '@angular/core'
 import { HttpClient } from '@angular/common/http'
 import { environment } from '../../../environments/environment'
-import { IPerson } from '../../../../../api/src/models/profile.type'
-import { Observable } from 'rxjs'
-import { catchError, first } from 'rxjs/operators'
+import { IPerson } from '../../../../../api/src/models/user.type'
 
 @Injectable()
 export class UserService {

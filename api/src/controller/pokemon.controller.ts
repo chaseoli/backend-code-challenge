@@ -1,4 +1,14 @@
-import { Route, Controller, OperationId, Post, Body, Get, Query } from 'tsoa'
+import {
+  Route,
+  Controller,
+  OperationId,
+  Post,
+  Body,
+  Get,
+  Query,
+  Security,
+  Request,
+} from 'tsoa'
 import {
   IPokemon,
   IPokemonTextSearch,
@@ -10,6 +20,7 @@ import {
   IGenericHttpResponse,
   IGenericErrorResponse,
 } from '../models/generic.type'
+import { IRequestUser } from '../models/user.type'
 
 @Route('pokemon')
 export class PokemonController extends Controller {
@@ -93,14 +104,14 @@ export class PokemonController extends Controller {
     }
   }
 
-  @Get('complex/{startAtIdx}/{take}')
+  @Post('complex/{startAtIdx}/{take}')
   @OperationId('pokemonQuery')
   public async complex(
     startAtIdx: number,
     take: number,
     @Body() body: IPokemonComplexQuery,
     @Query() name?: string
-  ) :Promise<IPokemon[] | IGenericErrorResponse> {
+  ): Promise<IPokemon[] | IGenericErrorResponse> {
     try {
       return await this.pokemon.filterAll(
         startAtIdx + take,
@@ -122,16 +133,62 @@ export class PokemonController extends Controller {
     }
   }
 
-  @Post('favorite/{pokemonId}/{isFavorite}')
+  @Get('favorites')
+  @OperationId('pokemonAllTypes')
+  @Security({
+    user: [],
+  })
+  public async getFavorites(
+    @Request() request: IRequestUser
+  ): Promise<IPokemon[] | IGenericErrorResponse> {
+    try {
+      const p = await this.pokemon.getFavorites(request.user.uid)
+      return p
+    } catch (error) {
+      const e = new PokemonError(
+        'failed to get favorites from database',
+        error
+      )
+      this.setStatus(400)
+      return {
+        errorMessage: e.message,
+        errorId: e.id,
+      }
+    }
+  }
+
+  /**
+   *
+   *
+   * @param {IRequestUser} request
+   * @param {string} pokemonId
+   * @param {(0 | 1)} isFavorite  1 = mark as favorite, 0 = remove as favorite
+   * @return {*}  {(Promise<void | IGenericErrorResponse>)}
+   * @memberof PokemonController
+   */
+  @Post('favorites/{pokemonId}/{isFavorite}')
   @OperationId('pokemonQuery')
+  @Security({
+    user: [],
+  })
   public async favorite(
+    @Request() request: IRequestUser,
     pokemonId: string,
-    isFavorite: 0 | 1,
+    isFavorite: 0 | 1
   ): Promise<void | IGenericErrorResponse> {
     try {
-      await 
-     return
+      let _isFavorite = false // default to not a favorite
+      // check if is a user's favorite
+      if (isFavorite === 1) {
+        _isFavorite = true
+      }
+      // update favorite preference
+      await this.pokemon.updateFavorite(
+        request.user.uid,
+        pokemonId,
+        _isFavorite
       )
+      return
     } catch (error) {
       const e = new PokemonError(
         'failed to perform complex query on pokemon from database',
@@ -144,6 +201,4 @@ export class PokemonController extends Controller {
       }
     }
   }
-
-
 }
