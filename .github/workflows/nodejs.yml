@@ -35,7 +35,7 @@ jobs:
       #   run: npm install
       #   working-directory: ./pokemon-app
       - name: install deps for ./api
-        run: npm install & npm i -g tsoa js-yaml typescript @angular/cli mocha ts-node @types/chai @types/mocha
+        run: npm install & npm i -g tsoa js-yaml typescript@3.9.7 @angular/cli mocha@8.1.1 ts-node@v9.0.0
         working-directory: ./api
 
       # server API
@@ -49,10 +49,13 @@ jobs:
           build: dev
           firebase_database_url: https://pokemon-dcb38.firebaseio.com
         working-directory: ./api
-        run: sh scripts/decrypt-secrets.sh $POKEMON_PASSPHRASE ; npm test
-      # - name: Test printing your secret (Remove this step in production)
-      #   run: cat $HOME/secrets/dev.env
-      # working-directory: ./api
+        run: sh scripts/decrypt-secrets.sh $POKEMON_PASSPHRASE
+      - name: Test printing your secret (Remove this step in production)
+        run: cat $HOME/secrets/dev.env
+        working-directory: ./api
+      - name: Run tests
+        run: npm run test
+        working-directory: ./api
 
       # web ui
       # NOTE: Run this last since it takes the longest
