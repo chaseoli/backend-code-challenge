@@ -134,7 +134,7 @@ export class PokemonController extends Controller {
   }
 
   @Get('favorites')
-  @OperationId('pokemonAllTypes')
+  @OperationId('pokemonGetFavorites')
   @Security({
     user: [],
   })
@@ -167,7 +167,7 @@ export class PokemonController extends Controller {
    * @memberof PokemonController
    */
   @Post('favorites/{pokemonId}/{isFavorite}')
-  @OperationId('pokemonQuery')
+  @OperationId('pokemonNewFavorite')
   @Security({
     user: [],
   })

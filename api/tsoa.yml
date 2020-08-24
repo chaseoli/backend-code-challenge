@@ -6,7 +6,16 @@
 entryFile: ./src/app.ts
 spec: 
   specVersion: 3
+  description: "Login at [https://pokemon-dcb38.web.app/secure/auth](https://pokemon-dcb38.web.app/secure/auth) to obtain user auth token"
   outputDirectory: ./def  # output from '$ tsoa spec'
+  # host: 'https://pokemon-dcb38.uc.r.appspot.com'
+  name: Quantum Pokemon
+  spec: 
+    servers: 
+      - url: https://pokemon-dcb38.uc.r.appspot.com
+        description: Live running API instance in the cloud
+      - url: http://localhost:8080
+        description: Locally running API instance 
   
   # https://github.com/lukeautry/tsoa#authentication
   securityDefinitions:
@@ -15,20 +24,20 @@ spec:
       type: apiKey
       in: header
       name: X-key
-    auth: 
-      description: A user authentication token (TODO needs implementation like JWT)
+    user: 
+      description: Requires a user authentication token. Authenticate at https://pokemon-dcb38.web.app/secure/auth for token.
       # use apiKey since defining custom header 
       # see https://swagger.io/docs/specification/authentication/api-keys/
       type: apiKey
       in: header
       name: X-auth
-    some_test: 
-      description: Used to test middleware (TODO remove for prod)
+    live_auth: 
+      description: Used to test middleware
       type: apiKey
       name: X-auth
       in: header
-      scopes: 
-        write: demonstrates usage of a scope
+      # scopes: 
+      #   read: demonstrates usage of a scope
 routes: 
   routesDir: ./src
   middleware: express
@@ -42,21 +51,6 @@ routes:
 #   description: pokemon API
 
 # see https://swagger.io/docs/specification/api-host-and-base-path/ for definition in tsoa
-servers:
-  - url: '{protocol}://{environment}/'
-    description: pokemon api server (production uses live data and both dev and staging use test data)
-    variables:
-      environment:
-        default: api            # Production server
-        enum:
-          - pokemon.com         # Production server
-          - dev.pokemon.com     # Staging server
-          - localhost:8080      # Local development server
-      protocol:
-        default: https
-        enum:
-          - http
-          - https
 
 # NOTE: tsoa currently doesn't follow the spec to override 'securitySchemes' for auth
 # # https://swagger.io/docs/specification/authentication/
