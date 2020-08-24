@@ -39,12 +39,12 @@ jobs:
         working-directory: ./api
 
       # server API
+      - name: decrypt secrets
+        run: npm run decrypt-secrets      
         env:
-          POKEMON_PASSPHRASE:  ${{ secrets.POKEMON_PASSPHRASE }}
+          POKEMON_PASSPHRASE: redyellowblueberry
           cicd: githubaction
           build: dev
-      - name: decrypt secrets
-        run: npm run decrypt-secrets
       - name: Test printing your secret (Remove this step in production)
         run: cat $HOME/secrets/dev.env
       - name: tests server
