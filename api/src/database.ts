@@ -5,7 +5,7 @@ import { IGlobal } from './models/env.type'
 declare var global: IGlobal
 
 export const startMongo = async () => {
-  console.log('mongo connection uri', process.env.db_uri)
+  // console.log('mongo connection uri', process.env.db_uri)
   const client = MongoClient.connect(
     process.env.db_uri,
     // TODO: Connection Pooling
