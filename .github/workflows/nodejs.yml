@@ -39,12 +39,10 @@ jobs:
         working-directory: ./api
 
       # server API
-      # - name: build server
-      #   run: npm run build --if-present
-      #   working-directory: ./api
-      # This command is just an example to show your secret being printed
-      # Ensure you remove any print statements of your secrets. GitHub does
-      # not hide secrets that use this workaround.
+        env:
+          POKEMON_PASSPHRASE:  ${{ secrets.POKEMON_PASSPHRASE }}
+          cicd: githubaction
+          build: dev
       - name: decrypt secrets
         run: npm run decrypt-secrets
       - name: Test printing your secret (Remove this step in production)
@@ -52,10 +50,6 @@ jobs:
       - name: tests server
         run: npm test
         working-directory: ./api
-        env:
-          POKEMON_PASSPHRASE: ${{ secrets.POKEMON_PASSPHRASE }}
-          cicd: githubaction
-          build: dev
 
       # web ui
       # NOTE: Run this last since it takes the longest
