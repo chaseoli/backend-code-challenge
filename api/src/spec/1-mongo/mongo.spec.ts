@@ -15,6 +15,13 @@ interface IMongoClientWithOptions extends MongoClient {
 describe('MongoClient', () => {
   let client: IMongoClientWithOptions
   before(async () => {
+    // if using github actions
+    if (process.env.cicd === 'githubaction') {
+      // load using env file
+      console.log(process.env.GOOGLE_APPLICATION_CREDENTIALS)
+      require('dotenv').config({ path: '~/secrets/dev.env' })
+      console.log(process.env.GOOGLE_APPLICATION_CREDENTIALS)
+    }
     // connect the db
     await startMongo()
     // set on global object
@@ -42,5 +49,4 @@ describe('MongoClient', () => {
       expect(e).to.be.null
     }
   })
-
 })

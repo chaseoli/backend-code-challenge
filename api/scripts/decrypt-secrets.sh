@@ -14,7 +14,7 @@ passphrase="$1"
 # set default to locally defined env var
 if [ -z "$passphrase" ] && [ "${passphrase+xxx}" = "xxx" ]; then passphrase="$POKEMON_PASSPHRASE"; fi
 
-echo "trying to run with $passphrase"
+# echo "trying to run with $passphrase"
 
 # --batch to prevent interactive command
 # --yes to assume "yes" for questions

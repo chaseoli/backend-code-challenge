@@ -21,9 +21,9 @@
     "skipLibCheck": true,
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
-    "typeRoots": ["api/node_modules/@types"]
+    "typeRoots": ["./api/node_modules/@types"]
   },
   "compileOnSave": true,
-  "include": ["api/src"],
+  "include": ["./api/src"],
   "exclude": ["../node_modules"]
 }
