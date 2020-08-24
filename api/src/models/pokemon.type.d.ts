@@ -8,7 +8,7 @@ export interface IPokemon {
   weight: IMeasurements
   height: IMeasurements
   fleeRate: number // 0.1,
-  'Previous evolution(s)': IEvolutions[]
+  'Previous evolution(s)'?: IEvolutions[]
   evolutionRequirements?: {
     amount: number // 25,
     name: string // "Bulbasaur candies"

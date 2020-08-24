@@ -73,7 +73,7 @@ const models: TsoaRoute.Models = {
             "weight": { "ref": "IMeasurements", "required": true },
             "height": { "ref": "IMeasurements", "required": true },
             "fleeRate": { "dataType": "double", "required": true },
-            "Previous evolution(s)": { "dataType": "array", "array": { "ref": "IEvolutions" }, "required": true },
+            "Previous evolution(s)": { "dataType": "array", "array": { "ref": "IEvolutions" } },
             "evolutionRequirements": { "dataType": "nestedObjectLiteral", "nestedProperties": { "name": { "dataType": "string", "required": true }, "amount": { "dataType": "double", "required": true } } },
             "evolutions": { "dataType": "array", "array": { "ref": "IEvolutions" } },
             "maxCP": { "dataType": "double", "required": true },

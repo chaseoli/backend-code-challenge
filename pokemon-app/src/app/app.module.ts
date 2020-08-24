@@ -9,7 +9,7 @@ import { AuthModule } from './shared/modules/auth.module'
 import { WindowService } from './shared/services/window.service'
 import { DocumentService } from './shared/services/document.service'
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http'
-import { AuthInterceptor } from './shared/interceptor/auth.interceptor'
+import { AuthInterceptor } from './shared/interceptor/auth.interceptor';
 
 @NgModule({
   declarations: [AppComponent],

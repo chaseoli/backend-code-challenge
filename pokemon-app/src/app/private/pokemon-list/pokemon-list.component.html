@@ -1,0 +1,48 @@
+<ibm-structured-list>
+  <ibm-list-header>
+    <ibm-list-column nowrap="true">Pokemon</ibm-list-column>
+    <ibm-list-column>Details</ibm-list-column>
+  </ibm-list-header>
+
+  <ibm-list-row *ngFor="let p of pokemon">
+    <ibm-list-column>
+        <p>{{ p.name }}</p>
+        <p>{{ p.classification }}</p>
+        <p>{{ p.types }}</p>
+    </ibm-list-column>
+    <ibm-list-column>
+      <p><strong>Resistant:</strong> {{ p.resistant }}</p>
+      <p><strong>Weaknesses:</strong> {{ p.weaknesses }}</p>
+      <p>
+        <strong>Weight:</strong> {{ p.weight.minimum }} {{ p.weight.maximum }}
+      </p>
+      <p>
+        <strong>Height:</strong> {{ p.height.minimum }} {{ p.height.maximum }}
+      </p>
+      <p><strong>Flee Rate:</strong> {{ p.fleeRate }}</p>
+      <p>
+        <strong>Evolution Requirements:</strong>
+        {{ p.evolutionRequirements.amount }} {{ p.evolutionRequirements.name }}
+      </p>
+      <p>
+        <strong>Evolutions:</strong>
+        <span *ngFor="let e of p.evolutions">{{ ' ' + e.name }}</span>
+      </p>
+      <p><strong>Max CP:</strong> {{ p.maxCP }}</p>
+      <p><strong>Max HP:</strong> {{ p.maxHP }}</p>
+      <div>
+        <strong>Fast Attacks:</strong>
+        <p *ngFor="let f of p.attacks.fast">
+          {{ ' ' + f.name }}({{ f.type }}) - {{ f.damage + ' damage' }}
+        </p>
+      </div>
+      <div>
+        <strong>Special Attacks:</strong>
+        <p *ngFor="let s of p.attacks.special">
+          {{ ' ' + s.name }}({{ s.type }}) - {{ s.damage + ' damage' }}
+        </p>
+      </div>
+    </ibm-list-column>
+  </ibm-list-row>
+
+</ibm-structured-list>

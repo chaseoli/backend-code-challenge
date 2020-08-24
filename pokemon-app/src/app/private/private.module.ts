@@ -11,11 +11,10 @@ import { SessionResolver } from '../shared/guards/session.resolver'
 import { LodashService } from '../shared/services/lodash.service '
 import { SwitcherComponent } from './switcher/switcher.component'
 import { CustomLoadingComponent } from '../shared/components/loading.component'
-import { HTTP_INTERCEPTORS } from '@angular/common/http'
 import { AuthComponent } from './auth/auth.component'
-import { AuthInterceptor } from '../shared/interceptor/auth.interceptor'
-import { UserService } from '../shared/services/user.service'
 import { PokemonService } from '../shared/services/pokemon.service'
+import { PokemonListComponent } from './pokemon-list/pokemon-list.component'
+import { PokemonQueryComponent } from './pokemon-query/pokemon-query.component'
 
 @NgModule({
   declarations: [
@@ -24,14 +23,11 @@ import { PokemonService } from '../shared/services/pokemon.service'
     SwitcherComponent,
     CustomLoadingComponent,
     AuthComponent,
+    PokemonListComponent,
+    PokemonQueryComponent,
   ],
   entryComponents: [],
-  providers: [
-    SessionService,
-    LodashService,
-    SessionResolver,
-    PokemonService
-  ],
+  providers: [SessionService, LodashService, SessionResolver, PokemonService],
   imports: [
     CommonModule,
     PrivateRoutingModule,
