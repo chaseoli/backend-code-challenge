@@ -9,7 +9,7 @@
 # IMPORTANT! Get the "dev.env" file from a team member and paste it into the ./api directory. This file contains development secrets to run the application locally.
 
 # Install global dependencies (first time only)
-npm i -g tsoa js-yaml typescript @angular/cli
+npm i -g tsoa js-yaml typescript @angular/cli mocha ts-node
 
 # Install project dependencies (first time only)
 cd api && npm i
