@@ -11,11 +11,6 @@ if [ -z "$_GOOGLE_APPLICATION_CREDENTIALS" ] && [ "${_GOOGLE_APPLICATION_CREDENT
 if [ -z "$_build" ] && [ "${_build+xxx}" = "xxx" ]; then _build="$build"; fi
 if [ -z "$_firebase_database_url" ] && [ "${_firebase_database_url+xxx}" = "xxx" ]; then _firebase_database_url="$firebase_database_url"; fi
 
-echo $1
-echo $2
-echo $3
-echo $4
-
 rm -rf spec-lib
 mkdir spec-lib
 
