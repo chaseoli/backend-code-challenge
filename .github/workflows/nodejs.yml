@@ -43,7 +43,7 @@ jobs:
       - name: Run api server tests
         env:
           POKEMON_PASSPHRASE: ${{ secrets.POKEMON_PASSPHRASE }}
-          db_uri: ${{ secrets.db_uri }}
+          db_uri: ${{ secrets.DB_URI }}
           GOOGLE_APPLICATION_CREDENTIALS: ~/secrets/service-account.json
           build: dev
           firebase_database_url: https://pokemon-dcb38.firebaseio.com
