@@ -65,6 +65,8 @@ api/spec-lib
 api/lib
 api/build
 api/**/*.js
+# # except pushup .js file for tests
+# !api/spec-lib/**/*.js 
 web/dist
 api/tsoa.json
 api/def/swagger.json
