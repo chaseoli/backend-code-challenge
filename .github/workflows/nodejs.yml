@@ -26,34 +26,25 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
-
-      #  all installs
-      # - name: install deps for ./pokemon-app
-      #   run: npm install
-      #   working-directory: ./pokemon-app
-      - name: install deps for ./api
-        run: npm install & npm i -g tsoa js-yaml typescript @angular/cli mocha ts-node
-        working-directory: ./api
-
-      # server API
-      - uses: actions/checkout@v2
-      - name: Decrypt secrets
-        run: sh scripts/decrypt-secrets.sh $POKEMON_PASSPHRASE     
+        working-directory: ./api  
         env:
           POKEMON_PASSPHRASE: ${{ secrets.POKEMON_PASSPHRASE }}
           cicd: githubaction
           build: dev
-        working-directory: ./api
+      - name: install deps for ./api
+        run: npm install & npm i -g tsoa js-yaml typescript @angular/cli mocha ts-node
+        
+      # server API
+      - name: Decrypt secrets
+        run: sh scripts/decrypt-secrets.sh $POKEMON_PASSPHRASE     
+        
       # - name: Test printing your secret (Remove this step in production)
       #   run: cat $HOME/secrets/dev.env
         # working-directory: ./api
-      - uses: actions/checkout@v2
       - name: Run api server tests
         run: npm test
-        working-directory: ./api
 
       # web ui
       # NOTE: Run this last since it takes the longest

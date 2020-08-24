@@ -1,1 +1,1 @@
-mocha --require ts-node/register --timeout 999999 --colors --exit src/spec/**/*.spec.ts
+api/node_modules/mocha/bin/_mocha -r ts-node/register --timeout 999999 --colors --exit api/src/spec/**/*.spec.ts
