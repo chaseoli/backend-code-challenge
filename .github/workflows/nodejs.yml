@@ -50,12 +50,12 @@ jobs:
         working-directory: ./api
         run: sh scripts/decrypt-secrets.sh $POKEMON_PASSPHRASE
       - uses: actions/checkout@v2
-      - name: Test printing your secret (Remove this step in production)
-        run: cat $HOME/secrets/dev.env
-        working-directory: ./api
+      # - name: Test printing your secret (Remove this step in production)
+      #   run: cat $HOME/secrets/dev.env
+      #   working-directory: ./api
       - uses: actions/checkout@v2
       - name: Run tests
-        run: npm run test
+        run: sh scripts/tests.sh $db_uri $GOOGLE_APPLICATION_CREDENTIALS $build $firebase_database_url
         working-directory: ./api
 
       # web ui

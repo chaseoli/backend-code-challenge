@@ -15,7 +15,7 @@ passphrase="$1"
 if [ -z "$passphrase" ] && [ "${passphrase+xxx}" = "xxx" ]; then passphrase="$POKEMON_PASSPHRASE"; fi
 
 # echo "trying to run with $passphrase"
-echo "and your mongo connection string $db_uri"
+# echo "and your mongo connection string $db_uri"
 
 # --batch to prevent interactive command
 # --yes to assume "yes" for questions
