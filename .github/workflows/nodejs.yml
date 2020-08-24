@@ -40,8 +40,7 @@ jobs:
 
       # server API
       - uses: actions/checkout@v2
-      - name: Decrypt secrets
-        run: sh scripts/decrypt-secrets.sh $POKEMON_PASSPHRASE     
+      - name: Run api server tests
         env:
           POKEMON_PASSPHRASE: ${{ secrets.POKEMON_PASSPHRASE }}
           db_uri: ${{ secrets.DB_URI }}
@@ -50,12 +49,11 @@ jobs:
           build: dev
           firebase_database_url: https://pokemon-dcb38.firebaseio.com
         working-directory: ./api
+        run: sh scripts/decrypt-secrets.sh $POKEMON_PASSPHRASE     
+        run: npm test
       # - name: Test printing your secret (Remove this step in production)
       #   run: cat $HOME/secrets/dev.env
-        # working-directory: ./api
-      - name: Run api server tests
-        run: npm test
-        working-directory: ./api
+      # working-directory: ./api
 
       # web ui
       # NOTE: Run this last since it takes the longest
