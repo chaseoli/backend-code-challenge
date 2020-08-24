@@ -27,23 +27,25 @@ jobs:
       - uses: actions/checkout@v2
       - name: install deps for ./api
         with:
-          node-version: ${{ matrix.node-version }}
-        working-directory: ./api  
+          node-version: ${{ matrix.node-version }}  
         env:
           POKEMON_PASSPHRASE: ${{ secrets.POKEMON_PASSPHRASE }}
           cicd: githubaction
           build: dev
         run: npm install & npm i -g tsoa js-yaml typescript @angular/cli mocha ts-node
+        working-directory: ./api
         
       # server API
       - name: Decrypt secrets
         run: sh scripts/decrypt-secrets.sh $POKEMON_PASSPHRASE     
+        working-directory: ./api
         
       # - name: Test printing your secret (Remove this step in production)
       #   run: cat $HOME/secrets/dev.env
         # working-directory: ./api
       - name: Run api server tests
         run: npm test
+        working-directory: ./api
 
       # web ui
       # NOTE: Run this last since it takes the longest
