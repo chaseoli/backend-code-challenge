@@ -19,6 +19,14 @@ import { IPerson, IRequestUser } from '../models/user.type'
 @Route('user')
 export class UserController extends Controller {
   private userDb = new UserContext()
+  /**
+   * Adds the user to the database (used during registration process)
+   *
+   * @param {IPerson} person
+   * @param {IRequestUser} request
+   * @return {*}  {(Promise<IGenericHttpResponse | IGenericErrorResponse>)}
+   * @memberof UserController
+   */
   @Post()
   @OperationId('personAdd')
   @Security({
@@ -56,6 +64,13 @@ export class UserController extends Controller {
     }
   }
 
+  /**
+   * Get user detail/profile by user id (aka: uid)
+   *
+   * @param {string} id
+   * @return {*}  {(Promise<IPerson | IGenericErrorResponse>)}
+   * @memberof UserController
+   */
   @Get('{id}')
   @OperationId('personByUid')
   public async byId(id: string): Promise<IPerson | IGenericErrorResponse> {

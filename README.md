@@ -53,9 +53,9 @@ NOTE: First time users will need to register for an account with a email and pas
 
 ## Deployment
 ### UI Deployment
-The ui is deployed as a single page application like a CDN or using cloud storage. Please see `npm run deploy-dev` for more details regarding deployment.  
+The ui is deployed as a single page application like a CDN or using cloud storage.
 ### API Server Deployment
-I contemplated using Kubernetes to deploy this, however a cluster with 3 min nodes is expensive and overkill for the needs of the this project. I decided to take advantage of deploying the node.js server to GCP app-engine which will operate almost entirely for free. 
+I contemplated using Kubernetes to deploy this, however a cluster with 3 min nodes is expensive and overkill for the needs of the this project. I decided to take advantage of deploying the node.js server to GCP app-engine which will operate almost entirely for free. Please see `npm run deploy-dev` for more details regarding deployment.  
 
 ## Secret Manager
 The api should NEVER have the ability to write/update secrets. The API should only consume these configurations via the secret manager. The system admin will be manually provisioning secrets thought cloud UI Console. This project makes use of GCPs secret manager and integrates securely with App-engine.

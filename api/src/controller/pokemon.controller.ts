@@ -25,8 +25,18 @@ import { IRequestUser } from '../models/user.type'
 @Route('pokemon')
 export class PokemonController extends Controller {
   private pokemon = new PokemonContext()
+  /**
+   * Batch add pokemon to the database
+   *
+   * @param {IPokemon[]} pokemons
+   * @return {*}  {(Promise<IGenericHttpResponse | IGenericErrorResponse>)}
+   * @memberof PokemonController
+   */
   @Post()
   @OperationId('pokemonAdd')
+  @Security({
+    user: [],
+  })
   public async add(
     @Body() pokemons: IPokemon[]
   ): Promise<IGenericHttpResponse | IGenericErrorResponse> {
@@ -45,6 +55,13 @@ export class PokemonController extends Controller {
     }
   }
 
+  /**
+   * Get Pokemon by specified pokemon id
+   *
+   * @param {string} id
+   * @return {*}  {(Promise<IPokemon | IGenericErrorResponse>)}
+   * @memberof PokemonController
+   */
   @Get('id/{id}')
   @OperationId('pokemonById')
   public async byId(id: string): Promise<IPokemon | IGenericErrorResponse> {
@@ -64,6 +81,13 @@ export class PokemonController extends Controller {
     }
   }
 
+  /**
+   * Get pokemon by name. Returns exact match if possible, otherwise it provides similarly named pokemon
+   *
+   * @param {string} name
+   * @return {*}  {(Promise<IPokemonTextSearch | IGenericErrorResponse>)}
+   * @memberof PokemonController
+   */
   @Get('name/{name}')
   @OperationId('pokemonByName')
   public async byName(
@@ -85,6 +109,12 @@ export class PokemonController extends Controller {
     }
   }
 
+  /**
+   * Gets all pokemon types listed in the database
+   *
+   * @return {*}  {(Promise<string[] | IGenericErrorResponse>)}
+   * @memberof PokemonController
+   */
   @Get('types')
   @OperationId('pokemonAllTypes')
   public async getAllTypes(): Promise<string[] | IGenericErrorResponse> {
@@ -104,6 +134,16 @@ export class PokemonController extends Controller {
     }
   }
 
+  /**
+   * Implements a complex query that allows filtering of pokemon by favorite, type, name, and enables paging. 
+   *
+   * @param {number} startAtIdx
+   * @param {number} take
+   * @param {IPokemonComplexQuery} body
+   * @param {string} [name]
+   * @return {*}  {(Promise<IPokemon[] | IGenericErrorResponse>)}
+   * @memberof PokemonController
+   */
   @Post('complex/{startAtIdx}/{take}')
   @OperationId('pokemonQuery')
   public async complex(
@@ -133,6 +173,13 @@ export class PokemonController extends Controller {
     }
   }
 
+  /**
+   * Gets favorite (eg: liked) pokemon for a user
+   *
+   * @param {IRequestUser} request
+   * @return {*}  {(Promise<IPokemon[] | IGenericErrorResponse>)}
+   * @memberof PokemonController
+   */
   @Get('favorites')
   @OperationId('pokemonGetFavorites')
   @Security({
@@ -145,10 +192,7 @@ export class PokemonController extends Controller {
       const p = await this.pokemon.getFavorites(request.user.uid)
       return p
     } catch (error) {
-      const e = new PokemonError(
-        'failed to get favorites from database',
-        error
-      )
+      const e = new PokemonError('failed to get favorites from database', error)
       this.setStatus(400)
       return {
         errorMessage: e.message,
@@ -158,7 +202,7 @@ export class PokemonController extends Controller {
   }
 
   /**
-   *
+   * Marks (and un-marks) pokemon as favorites
    *
    * @param {IRequestUser} request
    * @param {string} pokemonId
