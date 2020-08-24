@@ -40,17 +40,18 @@ jobs:
 
       # server API
       - uses: actions/checkout@v2
-      - name: decrypt secrets
+      - name: Decrypt secrets
         run: sh scripts/decrypt-secrets.sh $POKEMON_PASSPHRASE     
         env:
-          POKEMON_PASSPHRASE: redyellowblueberry
+          POKEMON_PASSPHRASE: ${{ secrets.POKEMON_PASSPHRASE }}
           cicd: githubaction
           build: dev
         working-directory: ./api
-      - name: Test printing your secret (Remove this step in production)
-        run: cat $HOME/secrets/dev.env
-        working-directory: ./api
-      - name: tests server
+      # - name: Test printing your secret (Remove this step in production)
+      #   run: cat $HOME/secrets/dev.env
+        # working-directory: ./api
+      - uses: actions/checkout@v2
+      - name: Run api server tests
         run: npm test
         working-directory: ./api
 
