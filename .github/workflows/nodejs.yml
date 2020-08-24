@@ -25,24 +25,34 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-      - name: install deps for ./api
+      - name: Use Node.js ${{ matrix.node-version }}
         with:
-          node-version: ${{ matrix.node-version }}  
-        env:
-          POKEMON_PASSPHRASE: ${{ secrets.POKEMON_PASSPHRASE }}
-          cicd: githubaction
-          build: dev
+          node-version: ${{ matrix.node-version }}
+
+      #  all installs
+      # - name: install deps for ./pokemon-app
+      #   run: npm install
+      #   working-directory: ./pokemon-app
+      - name: install deps for ./api
         run: npm install & npm i -g tsoa js-yaml typescript @angular/cli mocha ts-node
         working-directory: ./api
-        
+
       # server API
+
       - name: Decrypt secrets
         run: sh scripts/decrypt-secrets.sh $POKEMON_PASSPHRASE     
+        env:
+          POKEMON_PASSPHRASE: ${{ secrets.POKEMON_PASSPHRASE }}
+          DB_URI: ${{ secrets.DB_URI }}
+          GOOGLE_APPLICATION_CREDENTIALS: ~/secrets/service-account.json
+          # cicd: githubaction
+          build: dev
+          firebase_database_url: https://pokemon-dcb38.firebaseio.com
         working-directory: ./api
-        
       # - name: Test printing your secret (Remove this step in production)
       #   run: cat $HOME/secrets/dev.env
         # working-directory: ./api
+
       - name: Run api server tests
         run: npm test
         working-directory: ./api

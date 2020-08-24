@@ -32,7 +32,8 @@ interface IDevSecrets {
 
 export interface ISecrets {
   // the following will be set and retrieved via Secret Manager
-  db_uri: string // mongo connection string with password
+  // uppercase because github actions requires uppercase for secrets
+  DB_URI: string // mongo connection string with password
 }
 
 export interface IGlobal {

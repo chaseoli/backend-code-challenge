@@ -29,7 +29,7 @@ export async function loadSecrets() {
 
     const names: string[] = [
       // // see secrets from /env.d.ts ISecrets
-      'db_uri',
+      'DB_URI',
     ]
 
     for (const i of names) {
