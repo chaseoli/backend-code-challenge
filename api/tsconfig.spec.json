@@ -24,8 +24,7 @@
   },
   "compileOnSave": true,
   "include": [
-    "spec",
-    "src"
+    "src/spec"
   ],
   "exclude": [
     "../node_modules"
