@@ -1,1 +1,1 @@
-node_modules/mocha/bin/_mocha -r ts-node/register --timeout 999999 --colors --exit src/spec/**/*.spec.ts
+mocha -r ts-node/register --timeout 999999 --colors --exit src/spec/**/*.spec.ts

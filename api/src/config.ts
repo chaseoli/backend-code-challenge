@@ -32,14 +32,6 @@ export class Config {
     // enable all origins:
     this.app.use(cors())
 
-    // if using github actions
-    if (process.env.cicd === 'githubaction') {
-      // load using env file
-      console.log(process.env.GOOGLE_APPLICATION_CREDENTIALS)
-      require('dotenv').config({ path: '~/secrets/dev.env' })
-      console.log(process.env.GOOGLE_APPLICATION_CREDENTIALS)
-    }
-
     // initialize managed services
     this.startServices()
 
