@@ -17,6 +17,7 @@
     "decrypt-secrets": "sh scripts/decrypt-secrets.sh"
   },
   "dependencies": {
+    "@google-cloud/secret-manager": "^3.1.0",
     "body-parser": "^1.18.3",
     "cookie-parser": "^1.4.3",
     "cors": "^2.8.4",

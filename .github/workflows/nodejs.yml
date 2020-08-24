@@ -35,7 +35,7 @@ jobs:
       #   run: npm install
       #   working-directory: ./pokemon-app
       - name: install deps for ./api
-        run: npm install & npm i -g tsoa js-yaml typescript @angular/cli mocha ts-node
+        run: npm install & npm i -g tsoa js-yaml typescript @angular/cli mocha ts-node @types/chai @types/mocha
         working-directory: ./api
 
       # server API
