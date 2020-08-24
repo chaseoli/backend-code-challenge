@@ -2,7 +2,7 @@
 # https://github.com/GoogleCloudPlatform/github-actions/blob/master/example-workflows/gae/.github/workflows/app-engine.yml
 # https://github.com/marketplace/actions/setup-gcloud-environment
 
-name: cicd
+name: Build & Test
 
 on:
   # Trigger the workflow on push or pull request,
@@ -39,14 +39,17 @@ jobs:
         working-directory: ./api
 
       # server API
+      - uses: actions/checkout@v2
       - name: decrypt secrets
-        run: npm run decrypt-secrets      
+        run: sh scripts/decrypt-secrets.sh $POKEMON_PASSPHRASE     
         env:
           POKEMON_PASSPHRASE: redyellowblueberry
           cicd: githubaction
           build: dev
+        working-directory: ./api
       - name: Test printing your secret (Remove this step in production)
         run: cat $HOME/secrets/dev.env
+        working-directory: ./api
       - name: tests server
         run: npm test
         working-directory: ./api

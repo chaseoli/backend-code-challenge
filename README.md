@@ -1,4 +1,4 @@
-![https://github.com/chaseoli/backend-code-challenge/actions](https://github.com/chaseoli/backend-code-challenge/workflows/.github/workflows/nodejs.yml/badge.svg)
+![https://github.com/chaseoli/backend-code-challenge/actions](https://github.com/chaseoli/backend-code-challenge/workflows/cicd/badge.svg?branch=master)
 
 # Test for Dream Job on Quantum Team
 
