@@ -53,7 +53,6 @@ jobs:
       # - name: Test printing your secret (Remove this step in production)
       #   run: cat $HOME/secrets/dev.env
         # working-directory: ./api
-      - uses: actions/checkout@v2
       - name: Run api server tests
         run: npm test
         working-directory: ./api
