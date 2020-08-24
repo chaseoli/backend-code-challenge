@@ -7,6 +7,8 @@ Links
 * Demo UI - [https://pokemon-dcb38.web.app/](https://pokemon-dcb38.web.app/)
 * Tests Status - [https://github.com/chaseoli/backend-code-challenge/actions](https://github.com/chaseoli/backend-code-challenge/actions)
 
+<img src="screenshots/demo.gif" width="650" />
+
 ## Getting Started
 
 ```bash
