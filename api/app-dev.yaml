@@ -21,4 +21,9 @@ runtime: nodejs10
 
 env_variables:
   build: "prod" # prod because this is deployment
+  portal_url: "https://pokemon-dcb38.web.app/"
+  firebase_database_url: "https://pokemon-dcb38.firebaseio.com"
+  gcp_project_number: pokemon-dcb38
+
+
   

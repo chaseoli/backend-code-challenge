@@ -32,7 +32,7 @@ RUN rm -rf lib
 RUN pwd ; ls -a
 
 # install globals
-RUN npm i -g typescript@3.7.5 tsoa@3.0.8 js-yaml
+RUN npm i -g tsoa js-yaml typescript@3.9.7
 
 # install deps - required otherwise the linter will error
 # eg: src/routes.ts:16:26 - error TS2307: Cannot find module 'express'.

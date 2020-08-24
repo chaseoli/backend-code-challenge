@@ -73,7 +73,8 @@ copyDependentFilesToLib()
     mkdir -p lib
     cp app-$env.yaml lib/app.yaml # copy over the specific app.yaml for the specified env  
     cp package.json lib    
-    echo "copied app.yaml to ./apis/client/lib"
+    cp package-lock.json lib   
+    echo "copied deps to build file (ie: ./api/lib)"
 }
 
 build()
@@ -81,36 +82,34 @@ build()
     if [ $install == true ]
     then
         echo "installing all dependencies"
-        npm i -g tslint@5.12.0 typescript@3.7.5 tsoa@3.0.5 ts-node@7.0.1 js-yaml
+        npm i -g tsoa js-yaml typescript@3.9.7 @angular/cli mocha@8.1.1 ts-node@v9.0.0
         npm i 
     fi
 
     echo "tanspiling tsoa.yml to tsoa.json"
-    ~/.nvm/versions/node/v10.20.1/bin/js-yaml tsoa.yml > tsoa.json
+    js-yaml tsoa.yml > tsoa.json
     
     echo "generating tsoa routes"
-    ~/.nvm/versions/node/v10.20.1/bin/tsoa routes 
+    tsoa routes 
 
     echo "transpile API from typescript to javascript"
     tsc --project tsconfig.prod.json
-
-    copyDependentFilesToLib
 
 }
 
 if [ "$env" == "dev" ]
 then
     # TODO: update dir and project names...
-    serviceAccount="../../.secrets-test/dev-service-account.json"
-    gcloud_project="quantum-pokemon-dev"
+    # serviceAccount="~/secrets/service-account.json"
+    gcloud_project="pokemon-dcb38"
     build
     deployApi
 
 elif [ "$env" == "prod" ]
 then
 
-    serviceAccount="../../.secrets/prod-service-account.json"
-    gcloud_project="quantum-pokemon-prod"
+    # serviceAccount="~/secrets/service-account.json"
+    gcloud_project="pokemon-dcb38"
     build
     deployApi
 

@@ -13,6 +13,6 @@ export const environment: IWebEnvironment = {
     measurementId: "G-PDS8PR2W52"
   },
   // TODO: update deployed url
-  apiUrl: 'http://localhost:8080', 
+  apiUrl: 'https://pokemon-dcb38.uc.r.appspot.com', 
   timeout: 100,
 }

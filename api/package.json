@@ -7,7 +7,8 @@
     "node": ">=8"
   },
   "scripts": {
-    "start": "sh scripts/build.sh && sh scripts/start-dev.sh",
+    "start": "node app.js",
+    "start-dev": "sh scripts/build.sh && sh scripts/start-dev.sh",
     "start-debug": "sh scripts/build.sh && sh scripts/start-debug.sh",
     "start-docker": "node lib/app.js",
     "test": "sh scripts/tests.sh",
