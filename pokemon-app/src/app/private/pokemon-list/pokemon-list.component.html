@@ -13,7 +13,11 @@
           <p>{{ p.types }}</p>
         </div>
         <div>
-          <button *ngIf="favObj[p.id]" ibmButton="ghost" (click)="markFavorite(p.id, 0)">
+          <button
+            *ngIf="favObj[p.id] === true; else other_star"
+            ibmButton="ghost"
+            (click)="markFavorite(p.id, 0)"
+          >
             <svg
               icon
               ibmIconStarFilled
@@ -21,14 +25,20 @@
               class="bx--overflow-menu__icon"
             ></svg>
           </button>
-          <button *ngIf="!favObj[p.id]" ibmButton="ghost" (click)="markFavorite(p.id, 1)">
-            <svg
-              icon
-              ibmIconStar
-              size="20"
-              class="bx--overflow-menu__icon"
-            ></svg>
-          </button>
+          <ng-template #other_star>
+            <button
+              *ngIf="!favObj[p.id]"
+              ibmButton="ghost"
+              (click)="markFavorite(p.id, 1)"
+            >
+              <svg
+                icon
+                ibmIconStar
+                size="20"
+                class="bx--overflow-menu__icon"
+              ></svg>
+            </button>
+          </ng-template>
         </div>
       </div>
     </ibm-list-column>

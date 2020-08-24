@@ -17,6 +17,8 @@ export class PokemonQueryComponent implements OnInit {
   favoritesId: string[]
   showFavorites: boolean
   favorites: IPokemon
+  startAt: number
+  take: number
   @Output() pokemon = new EventEmitter<IPokemon[]>()
 
   constructor(
@@ -26,8 +28,10 @@ export class PokemonQueryComponent implements OnInit {
 
   ngOnInit(): void {
     this.showFavorites = false
+    this.startAt = 0
+    this.take = 151
     this.getTypes()
-    // this.query()
+    this.query()
   }
 
   async query() {
@@ -44,7 +48,7 @@ export class PokemonQueryComponent implements OnInit {
       }
     }
     const pokemon = await this.pokemonService
-      .complex(0, 151, this.name, this.selectedTypesArr, favsIdArr)
+      .complex(this.startAt, this.take, this.name, this.selectedTypesArr, favsIdArr)
       .toPromise()
     this.pokemon.emit(pokemon)
   }

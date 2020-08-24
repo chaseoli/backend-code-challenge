@@ -20,11 +20,11 @@ export class PokemonListComponent implements OnInit {
 
   ngOnInit(): void {
     // this.mock()
-    this.favObj = {}
     this.getFavorites()
   }
 
   async getFavorites() {
+    this.favObj = {}
     this.favorites = await this.pokemonService.getFavorites().toPromise()
     for (let i = 0; i < this.favorites.length; i++) {
       this._._.set(this.favObj, this.favorites[i].id, true)

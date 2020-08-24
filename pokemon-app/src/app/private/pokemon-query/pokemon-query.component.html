@@ -22,4 +22,18 @@
   </div>
 
   <button ibmButton="primary" size="sm" (click)="query()">Update</button>
+
+  <div>
+    <ibm-label>
+      Start At
+      <input ibmText theme="dark" placeholder="0 for first record" [(ngModel)]="startAt" />
+    </ibm-label>
+  </div>
+
+  <div>
+    <ibm-label>
+      Take
+      <input ibmText theme="dark" placeholder="0 min to 151 max" [(ngModel)]="take" />
+    </ibm-label>
+  </div>
 </div>
