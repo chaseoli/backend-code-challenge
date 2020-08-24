@@ -3,7 +3,7 @@
 # Test for Dream Job on Quantum Team
 
 Links
-* Swagger/OAS3 Docs - [https://app.swaggerhub.com/apis-docs/chaseoli/quantum-pokemon/1.0.1](https://app.swaggerhub.com/apis-docs/chaseoli/quantum-pokemon/1.0.1)
+* Swagger/OAS3 Docs - [https://app.swaggerhub.com/apis-docs/chaseoli/quantum-pokemon/1.0.2](https://app.swaggerhub.com/apis-docs/chaseoli/quantum-pokemon/1.0.2)
 * Demo UI - [https://pokemon-dcb38.web.app/](https://pokemon-dcb38.web.app/)
 * Tests Status - [https://github.com/chaseoli/backend-code-challenge/actions](https://github.com/chaseoli/backend-code-challenge/actions)
 
