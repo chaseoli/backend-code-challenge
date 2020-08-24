@@ -21,7 +21,7 @@
       "internalConsoleOptions": "neverOpen",
       "localRoot": "${workspaceRoot}",
       "outFiles": ["${workspaceRoot}/api/lib/**/*.js"],
-      "envFile": "${workspaceFolder}/api/dev.env"
+      "envFile": "${workspaceFolder}/api/.secrets/dev.env"
     },
     {
       "name": "debug ./api using dotenv",
@@ -75,7 +75,7 @@
       "console": "integratedTerminal",
       "internalConsoleOptions": "neverOpen",
       "protocol": "inspector",
-      "envFile": "${workspaceFolder}/api/dev.env"
+      "envFile": "${workspaceFolder}/api/.secrets/dev.env"
     }
   ]
 }

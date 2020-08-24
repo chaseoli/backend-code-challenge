@@ -23,6 +23,7 @@
   },
   "compileOnSave": true,
   "include": [
+    "spec",
     "src"
   ],
   "exclude": [

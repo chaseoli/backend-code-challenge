@@ -44,7 +44,7 @@ jobs:
         run: sh scripts/decrypt-secrets.sh $POKEMON_PASSPHRASE     
         env:
           POKEMON_PASSPHRASE: ${{ secrets.POKEMON_PASSPHRASE }}
-          DB_URI: ${{ secrets.DB_URI }}
+          db_uri: ${{ secrets.DB_URI }}
           GOOGLE_APPLICATION_CREDENTIALS: ~/secrets/service-account.json
           # cicd: githubaction
           build: dev

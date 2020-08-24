@@ -61,6 +61,7 @@ database-debug.log
 
 # generated & temp files
 api/spec
+api/spec-lib
 api/lib
 api/build
 api/**/*.js

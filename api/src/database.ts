@@ -6,7 +6,7 @@ declare var global: IGlobal
 
 export const startMongo = async () => {
   const client = MongoClient.connect(
-    process.env.DB_URI,
+    process.env.db_uri,
     // TODO: Connection Pooling
     // Set the poolSize to 50 connections.
     // TODO: Timeouts
