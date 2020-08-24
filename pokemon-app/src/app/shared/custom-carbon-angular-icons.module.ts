@@ -27,7 +27,9 @@ import {
   MovementModule,
   FinanceModule,
   ArrowsHorizontalModule,
-  DataVis_3Module
+  DataVis_3Module,
+  StarFilledModule,
+  StarModule
 } from '@carbon/icons-angular'
 
 @NgModule({
@@ -54,7 +56,9 @@ import {
     MovementModule,
     FinanceModule,
     ArrowsHorizontalModule,
-    DataVis_3Module
+    DataVis_3Module,
+    StarFilledModule,
+    StarModule
   ],
   declarations: [],
   exports: [
@@ -80,7 +84,9 @@ import {
     MovementModule,
     FinanceModule,
     ArrowsHorizontalModule,
-    DataVis_3Module
+    DataVis_3Module,
+    StarFilledModule,
+    StarModule
   ]
 })
 export class CustomCarbonIconModule {}

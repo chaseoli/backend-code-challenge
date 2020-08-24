@@ -40,6 +40,7 @@ import {
     TilesModule,
     TimePickerModule,
     TimePickerSelectModule,
+    ToggleModule,
     UIShellModule,
     ModalService
 } from 'carbon-components-angular';
@@ -87,6 +88,7 @@ import { CustomCarbonIconModule } from './custom-carbon-angular-icons.module';
         TilesModule,
         TimePickerModule,
         TimePickerSelectModule,
+        ToggleModule,
         UIShellModule
     ],
     providers: [NotificationService, ModalService],
@@ -132,6 +134,7 @@ import { CustomCarbonIconModule } from './custom-carbon-angular-icons.module';
         TilesModule,
         TimePickerModule,
         TimePickerSelectModule,
+        ToggleModule,
         UIShellModule
     ]
 })

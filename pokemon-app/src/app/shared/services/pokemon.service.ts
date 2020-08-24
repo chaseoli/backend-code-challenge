@@ -11,16 +11,27 @@ import { LodashService } from './lodash.service '
 export class PokemonService {
   constructor(private http: HttpClient, private _: LodashService) {}
 
-  getFavorites() {}
+  getFavorites() {
+    return this.http.get<IPokemon[]>(`${environment.apiUrl}/pokemon/favorites`)
+  }
 
-  addFavorite() {}
+  addFavorite(pokemonId: string, isFavorite: 0 | 1) {
+    return this.http.post(
+      `${environment.apiUrl}/pokemon/favorites/${pokemonId}/${isFavorite}`,
+      {}
+    )
+  }
+
+  getTypes() {
+    return this.http.get<string[]>(`${environment.apiUrl}/pokemon/types`)
+  }
 
   complex(
     startAtIdx: number,
     take: number,
+    name?: string,
     types?: string[],
-    favorites?: string[],
-    name?: string
+    favorites?: string[]
   ) {
     const body: IPokemonComplexQuery = {
       //   types: [],
@@ -32,14 +43,18 @@ export class PokemonService {
     if (favorites) {
       this._._.set(body, 'favorites', favorites)
     }
-    return this.http.post<IPokemon[]>(
-      `${environment.apiUrl}/complex/${startAtIdx}/${take}`,
-      body,
-      {
+    let options = {}
+    if (name) {
+      options = {
         params: {
           name: name,
         },
       }
+    }
+    return this.http.post<IPokemon[]>(
+      `${environment.apiUrl}/pokemon/complex/${startAtIdx}/${take}`,
+      body,
+      options
     )
   }
 }

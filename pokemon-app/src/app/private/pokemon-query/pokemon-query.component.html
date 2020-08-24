@@ -1,1 +1,25 @@
-<p>pokemon-query works!</p>
+<div fxLayout="column" fxLayoutGap="10px">
+  <div>
+    <ibm-label>
+      Search
+      <input ibmText theme="dark" placeholder="name..." [(ngModel)]="name" />
+    </ibm-label>
+  </div>
+
+  <ibm-toggle
+    label="Only Favorites"
+    onText="Show"
+    offText="Hide"
+    [(checked)]="showFavorites"
+    size="md"
+  >
+  </ibm-toggle>
+
+  <div *ngFor="let t of types$ | async">
+    <ibm-checkbox checked="true" (change)="onChangeTypes($event, t)">
+      {{ t }}
+    </ibm-checkbox>
+  </div>
+
+  <button ibmButton="primary" size="sm" (click)="query()">Update</button>
+</div>

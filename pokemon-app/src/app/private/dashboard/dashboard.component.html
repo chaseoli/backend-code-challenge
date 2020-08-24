@@ -1,2 +1,6 @@
-<app-pokemon-query></app-pokemon-query>
-<app-pokemon-list></app-pokemon-list>
+<div class="main">
+    <div fxLayout="row">
+        <app-pokemon-query (pokemon)="onChange($event)"></app-pokemon-query>
+        <app-pokemon-list [pokemon]="pokemon"></app-pokemon-list>
+    </div>
+</div>

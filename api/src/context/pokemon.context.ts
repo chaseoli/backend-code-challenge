@@ -111,7 +111,7 @@ export class PokemonContext {
     if (name) {
       query.push({
         $match: {
-          name: new RegExp(name, 'i'),
+          name: new RegExp(`^${name}`, 'i'),
         },
       })
     }

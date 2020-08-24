@@ -1,5 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core'
 import { IPokemon } from '../../../../../api/src/models/pokemon.type'
+import { PokemonService } from 'src/app/shared/services/pokemon.service'
+import { LodashService } from 'src/app/shared/services/lodash.service '
 
 @Component({
   selector: 'app-pokemon-list',
@@ -8,12 +10,33 @@ import { IPokemon } from '../../../../../api/src/models/pokemon.type'
 })
 export class PokemonListComponent implements OnInit {
   @Input() pokemon: IPokemon[]
+  favorites: IPokemon[]
+  favObj: { [id: string]: boolean }
 
-  constructor() {}
+  constructor(
+    private pokemonService: PokemonService,
+    private _: LodashService
+  ) {}
 
   ngOnInit(): void {
-    this.mock()
+    // this.mock()
+    this.favObj = {}
+    this.getFavorites()
   }
+
+  async getFavorites() {
+    this.favorites = await this.pokemonService.getFavorites().toPromise()
+    for (let i = 0; i < this.favorites.length; i++) {
+      this._._.set(this.favObj, this.favorites[i].id, true)
+    }
+  }
+
+  async markFavorite(pokemonId: string, isFavorite: 0 | 1) {
+    await this.pokemonService.addFavorite(pokemonId, isFavorite).toPromise()
+    await this.getFavorites()
+  }
+
+  isFavorite() {}
 
   private mock() {
     this.pokemon = []
@@ -46,7 +69,7 @@ export class PokemonListComponent implements OnInit {
         ],
       },
     }
-    // add some pokemons 
+    // add some pokemons
     for (let i = 0; i < 4; i++) {
       this.pokemon.push(pokemonMock)
     }

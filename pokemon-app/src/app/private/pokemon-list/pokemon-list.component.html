@@ -6,9 +6,31 @@
 
   <ibm-list-row *ngFor="let p of pokemon">
     <ibm-list-column>
-        <p>{{ p.name }}</p>
-        <p>{{ p.classification }}</p>
-        <p>{{ p.types }}</p>
+      <div fxLayout="row">
+        <div>
+          <p>{{ p.name }}</p>
+          <p>{{ p.classification }}</p>
+          <p>{{ p.types }}</p>
+        </div>
+        <div>
+          <button *ngIf="favObj[p.id]" ibmButton="ghost" (click)="markFavorite(p.id, 0)">
+            <svg
+              icon
+              ibmIconStarFilled
+              size="20"
+              class="bx--overflow-menu__icon"
+            ></svg>
+          </button>
+          <button *ngIf="!favObj[p.id]" ibmButton="ghost" (click)="markFavorite(p.id, 1)">
+            <svg
+              icon
+              ibmIconStar
+              size="20"
+              class="bx--overflow-menu__icon"
+            ></svg>
+          </button>
+        </div>
+      </div>
     </ibm-list-column>
     <ibm-list-column>
       <p><strong>Resistant:</strong> {{ p.resistant }}</p>
@@ -20,11 +42,11 @@
         <strong>Height:</strong> {{ p.height.minimum }} {{ p.height.maximum }}
       </p>
       <p><strong>Flee Rate:</strong> {{ p.fleeRate }}</p>
-      <p>
+      <p *ngIf="p.evolutionRequirements">
         <strong>Evolution Requirements:</strong>
         {{ p.evolutionRequirements.amount }} {{ p.evolutionRequirements.name }}
       </p>
-      <p>
+      <p *ngIf="p.evolutions">
         <strong>Evolutions:</strong>
         <span *ngFor="let e of p.evolutions">{{ ' ' + e.name }}</span>
       </p>
@@ -44,5 +66,4 @@
       </div>
     </ibm-list-column>
   </ibm-list-row>
-
 </ibm-structured-list>
