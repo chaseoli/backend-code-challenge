@@ -49,8 +49,7 @@ jobs:
           build: dev
           firebase_database_url: https://pokemon-dcb38.firebaseio.com
         working-directory: ./api
-        run: sh scripts/decrypt-secrets.sh $POKEMON_PASSPHRASE     
-        run: npm test
+        run: sh scripts/decrypt-secrets.sh $POKEMON_PASSPHRASE ; npm test
       # - name: Test printing your secret (Remove this step in production)
       #   run: cat $HOME/secrets/dev.env
       # working-directory: ./api
