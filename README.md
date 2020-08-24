@@ -1,4 +1,4 @@
-![https://github.com/chaseoli/backend-code-challenge/actions](https://github.com/chaseoli/backend-code-challenge/workflows/Build%20%26%20Test/badge.svg?branch=master)
+[![Github Actions Status](https://github.com/chaseoli/backend-code-challenge/workflows/Build%20%26%20Test/badge.svg?branch=master)](https://github.com/chaseoli/backend-code-challenge/actions)
 
 # Test for Dream Job on Quantum Team
 
