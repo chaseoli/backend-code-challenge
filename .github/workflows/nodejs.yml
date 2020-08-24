@@ -42,8 +42,10 @@ jobs:
       - uses: actions/checkout@v2
       - name: Run api server tests
         env:
-          POKEMON_PASSPHRASE: ${{ secrets.POKEMON_PASSPHRASE }}
-          db_uri: ${{ secrets.DB_URI }}
+          # POKEMON_PASSPHRASE: ${{ secrets.POKEMON_PASSPHRASE }}
+          # db_uri: ${{ secrets.DB_URI }}
+          POKEMON_PASSPHRASE: redyellowblueberry
+          db_uri: mongodb+srv://pokeadmin:pokepoke@cluster0.u0bj4.mongodb.net/test
           GOOGLE_APPLICATION_CREDENTIALS: ~/secrets/service-account.json
           # cicd: githubaction
           build: dev
