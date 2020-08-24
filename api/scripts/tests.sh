@@ -26,8 +26,10 @@ npm i --prefix spec-lib
 
 tsc -p ./tsconfig.spec.json
 
-env  db_uri: $_db_uri \ 
-GOOGLE_APPLICATION_CREDENTIALS: $_GOOGLE_APPLICATION_CREDENTIALS \ 
-build: $_build \ 
-firebase_database_url: $_firebase_database_url \ 
-mocha --timeout 999999  --exit --colors spec-lib/spec/**/*.spec.js
+# env  db_uri=$_db_uri \ 
+# GOOGLE_APPLICATION_CREDENTIALS=$_GOOGLE_APPLICATION_CREDENTIALS \ 
+# build=$_build \ 
+# firebase_database_url=$_firebase_database_url \ 
+# mocha --timeout 999999  --exit --colors spec-lib/spec/**/*.spec.js
+
+env  db_uri=mongodb+srv://pokeadmin:pokepoke@cluster0.u0bj4.mongodb.net/test GOOGLE_APPLICATION_CREDENTIALS=~/secrets/service-account.json build=dev firebase_database_url=https://pokemon-dcb38.firebaseio.com mocha --timeout 999999  --exit --colors spec-lib/spec/**/*.spec.js

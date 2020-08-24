@@ -40,7 +40,7 @@ jobs:
 
       # server API
       - uses: actions/checkout@v2
-      - name: Run api server tests
+      - name: Decrypt secret
         env:
           POKEMON_PASSPHRASE: ${{ secrets.POKEMON_PASSPHRASE }}
           db_uri: ${{ secrets.DB_URI }}
