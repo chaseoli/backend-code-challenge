@@ -6,6 +6,8 @@ import { AuthResolver } from '../shared/guards/auth.resolver'
 import { AuthCanActivateGuard } from '../shared/guards/auth.guard'
 import { SessionResolver } from '../shared/guards/session.resolver'
 import { AuthComponent } from './auth/auth.component'
+import { ByIdComponent } from './by-id/by-id.component'
+import { ByNameComponent } from './by-name/by-name.component'
 
 const routes: Routes = [
   {
@@ -16,6 +18,8 @@ const routes: Routes = [
     children: [
       { path: '', redirectTo: 'dashboard' },
       { path: 'dashboard', component: DashboardComponent },
+      { path: 'id/:id', component: ByIdComponent },
+      { path: 'name/:name', component: ByNameComponent },
       { path: 'auth', component: AuthComponent },
     ],
   },

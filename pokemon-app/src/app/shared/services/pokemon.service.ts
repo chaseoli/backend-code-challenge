@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http'
 import {
   IPokemon,
   IPokemonComplexQuery,
+  IPokemonTextSearch,
 } from '../../../../../api/src/models/pokemon.type'
 import { environment } from '../../../environments/environment'
 import { LodashService } from './lodash.service '
@@ -10,6 +11,14 @@ import { LodashService } from './lodash.service '
 @Injectable()
 export class PokemonService {
   constructor(private http: HttpClient, private _: LodashService) {}
+
+  getById(id: string) {
+    return this.http.get<IPokemon>(`${environment.apiUrl}/pokemon/id/${id}`)
+  }
+
+  getByName(name: string) {
+    return this.http.get<IPokemonTextSearch>(`${environment.apiUrl}/pokemon/name/${name}`)
+  }
 
   getFavorites() {
     return this.http.get<IPokemon[]>(`${environment.apiUrl}/pokemon/favorites`)

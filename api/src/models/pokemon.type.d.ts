@@ -38,7 +38,7 @@ export interface IEvolutions {
   name: string // "Ivysaur"
 }
 
-interface IPokemonTextSearch {
+export interface IPokemonTextSearch {
   match: IPokemon
   options: IPokemon[]
 }

@@ -14,7 +14,9 @@ import { CustomLoadingComponent } from '../shared/components/loading.component'
 import { AuthComponent } from './auth/auth.component'
 import { PokemonService } from '../shared/services/pokemon.service'
 import { PokemonListComponent } from './pokemon-list/pokemon-list.component'
-import { PokemonQueryComponent } from './pokemon-query/pokemon-query.component'
+import { PokemonQueryComponent } from './pokemon-query/pokemon-query.component';
+import { ByIdComponent } from './by-id/by-id.component';
+import { ByNameComponent } from './by-name/by-name.component'
 
 @NgModule({
   declarations: [
@@ -25,6 +27,8 @@ import { PokemonQueryComponent } from './pokemon-query/pokemon-query.component'
     AuthComponent,
     PokemonListComponent,
     PokemonQueryComponent,
+    ByIdComponent,
+    ByNameComponent,
   ],
   entryComponents: [],
   providers: [SessionService, LodashService, SessionResolver, PokemonService],
