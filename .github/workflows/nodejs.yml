@@ -25,9 +25,11 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-      # - name: Use Node.js ${{ matrix.node-version }}
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
+
       #  all installs
       # - name: install deps for ./pokemon-app
       #   run: npm install
@@ -37,7 +39,7 @@ jobs:
         working-directory: ./api
 
       # server API
-
+      - uses: actions/checkout@v2
       - name: Decrypt secrets
         run: sh scripts/decrypt-secrets.sh $POKEMON_PASSPHRASE     
         env:
@@ -51,7 +53,7 @@ jobs:
       # - name: Test printing your secret (Remove this step in production)
       #   run: cat $HOME/secrets/dev.env
         # working-directory: ./api
-
+      - uses: actions/checkout@v2
       - name: Run api server tests
         run: npm test
         working-directory: ./api
