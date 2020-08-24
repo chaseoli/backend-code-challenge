@@ -6,10 +6,16 @@ _firebase_database_url=$4
 
 
 # set default to locally defined env var
-if [ -z "$_db_uri" ] && [ "${_db_uri+xxx}" = "xxx" ]; then _db_uri="$POKEMON_PASSPHRASE"; fi
-if [ -z "$_GOOGLE_APPLICATION_CREDENTIALS" ] && [ "${_GOOGLE_APPLICATION_CREDENTIALS+xxx}" = "xxx" ]; then _GOOGLE_APPLICATION_CREDENTIALS="$POKEMON_PASSPHRASE"; fi
-if [ -z "$_build" ] && [ "${_build+xxx}" = "xxx" ]; then _build="$POKEMON_PASSPHRASE"; fi
-if [ -z "$_firebase_database_url" ] && [ "${_firebase_database_url+xxx}" = "xxx" ]; then _firebase_database_url="$POKEMON_PASSPHRASE"; fi
+if [ -z "$_db_uri" ] && [ "${_db_uri+xxx}" = "xxx" ]; then _db_uri="$db_uri"; fi
+if [ -z "$_GOOGLE_APPLICATION_CREDENTIALS" ] && [ "${_GOOGLE_APPLICATION_CREDENTIALS+xxx}" = "xxx" ]; then _GOOGLE_APPLICATION_CREDENTIALS="$GOOGLE_APPLICATION_CREDENTIALS"; fi
+if [ -z "$_build" ] && [ "${_build+xxx}" = "xxx" ]; then _build="$build"; fi
+if [ -z "$_firebase_database_url" ] && [ "${_firebase_database_url+xxx}" = "xxx" ]; then _firebase_database_url="$firebase_database_url"; fi
+
+echo $1
+echo $2
+echo $3
+echo $4
+
 
 rm -rf spec-lib
 mkdir spec-lib
