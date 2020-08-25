@@ -66,6 +66,8 @@
       "args": [
         "-r",
         "ts-node/register",
+        "--project",
+        "tsconfig.spec.json",
         "--timeout",
         "999999",
         "--colors",

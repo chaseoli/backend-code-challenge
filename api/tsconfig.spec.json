@@ -20,7 +20,10 @@
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
-    "skipDefaultLibCheck": true
+    "skipDefaultLibCheck": true,
+    "types": [
+      "node", "mocha", "chai"
+    ]
   },
   "compileOnSave": true,
   "include": [
