@@ -1,5 +1,5 @@
 import 'mocha'
-import { expect } from 'chai'
+var expect = require('chai').expect
 import { Db } from 'mongodb'
 import { IGlobal } from '../../models/env.type'
 import { PokemonContext } from '../../context/pokemon.context'

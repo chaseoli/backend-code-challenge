@@ -1,5 +1,5 @@
 import 'mocha'
-import { expect } from 'chai'
+var expect = require('chai').expect
 import { IGlobal } from '../../models/env.type'
 import { IPerson } from '../../models/user.type'
 import { UserContext } from '../../context/user.context'
