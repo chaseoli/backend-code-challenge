@@ -1,6 +1,5 @@
 {
   "compilerOptions": {
-    "watch": true,
     "module": "commonjs",
     "noUnusedLocals": true,
     "outDir": "spec-lib",
