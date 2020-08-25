@@ -21,5 +21,4 @@ mkdir spec-lib
 
 # env db_uri=$_db_uri GOOGLE_APPLICATION_CREDENTIALS=$_GOOGLE_APPLICATION_CREDENTIALS build=$_build firebase_database_url=$_firebase_database_url mocha --timeout 999999  --exit --colors spec-lib/spec/**/*.spec.js
 # env  db_uri=$_db_uri GOOGLE_APPLICATION_CREDENTIALS=$_GOOGLE_APPLICATION_CREDENTIALS build=$_build firebase_database_url=$_firebase_database_url ts-mocha -p tsconfig.spec.json src/spec/**/*.spec.ts
-npm i
 env db_uri=$_db_uri GOOGLE_APPLICATION_CREDENTIALS=$_GOOGLE_APPLICATION_CREDENTIALS build=$_build firebase_database_url=$_firebase_database_url mocha -r ts-node/register --project tsconfig.spec.json --timeout 999999 --colors --exit src/spec/**/*.spec.ts
