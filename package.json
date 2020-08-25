@@ -7,8 +7,9 @@
     "start": "npm run start-api & npm run start-ui",
     "start-api": "npm run --prefix api start-dev",
     "start-ui": "npm run --prefix pokemon-app start",
-    "test": "npm run decrypt-secrets & npm run --prefix api test",
-    "deploy-dev": "npm run --prefix deploy-dev",
+    "test": "npm run decrypt-secrets ; npm run --prefix api test",
+    "deploy-dev": "npm run --prefix api deploy-dev",
+    "install-deps": "npm i ; npm run --prefix api install-deps ; npm run --prefix pokemon-app install-deps",
     "encrypt-secrets": "npm run --prefix api encrypt-secrets",
     "decrypt-secrets": "npm run --prefix api decrypt-secrets"
   },
@@ -21,5 +22,12 @@
   "bugs": {
     "url": "https://github.com/chaseoli/backend-code-challenge/issues"
   },
-  "homepage": "https://github.com/chaseoli/backend-code-challenge#readme"
+  "homepage": "https://github.com/chaseoli/backend-code-challenge#readme",
+  "devDependencies": {
+    "@types/chai": "^4.2.12",
+    "@types/expect": "^24.3.0",
+    "@types/lodash": "^4.14.160",
+    "@types/mocha": "^8.0.3",
+    "@types/node": "^14.6.0"
+  }
 }

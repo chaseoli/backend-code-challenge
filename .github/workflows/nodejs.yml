@@ -31,27 +31,22 @@ jobs:
           node-version: ${{ matrix.node-version }}
 
       #  all installs
-      # - name: install deps for ./pokemon-app
-      #   run: npm install
-      #   working-directory: ./pokemon-app
+      - name: install deps for ./pokemon-app
+        run: npm i -g @angular/cli
       - name: install deps for ./api
-        run: npm install & npm i -g tsoa js-yaml typescript@3.9.7 @angular/cli mocha@8.1.1 ts-node@v9.0.0
-        working-directory: ./api
+        run: npm i -g tsoa@3.2.1 js-yaml typescript@3.9.7 mocha@8.1.1 ts-node@v9.0.0
 
       # server API
-      - uses: actions/checkout@v2
-      - name: Decrypt secret
-        env:
-          POKEMON_PASSPHRASE: ${{ secrets.POKEMON_PASSPHRASE }}
-        working-directory: ./api
-        run: sh scripts/decrypt-secrets.sh $POKEMON_PASSPHRASE
-      - uses: actions/checkout@v2
+      # - name: Decrypt secret
+      #   env:
+      #     POKEMON_PASSPHRASE: ${{ secrets.POKEMON_PASSPHRASE }}
+      #   working-directory: ./api
+      #   run: sh scripts/decrypt-secrets.sh $POKEMON_PASSPHRASE
       # - name: Test printing your secret (Remove this step in production)
       #   run: cat $HOME/secrets/dev.env
       #   working-directory: ./api
-      - uses: actions/checkout@v2
       - name: Run tests
-        run: sh scripts/tests.sh $db_uri $GOOGLE_APPLICATION_CREDENTIALS $build $firebase_database_url
+        run: npm i ; sh scripts/tests.sh $db_uri $GOOGLE_APPLICATION_CREDENTIALS $build $firebase_database_url
         env: 
           db_uri: ${{ secrets.DB_URI }}
           build: dev

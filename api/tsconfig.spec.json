@@ -20,13 +20,17 @@
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
-    "skipDefaultLibCheck": true
+    "skipDefaultLibCheck": true,
+    "types": [
+      "node", "mocha", "chai"
+    ]
   },
   "compileOnSave": true,
   "include": [
     "src/spec"
   ],
   "exclude": [
-    "../node_modules"
+    "./node_modules",
+    "./src"
   ]
 }

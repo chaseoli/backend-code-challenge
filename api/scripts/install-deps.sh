@@ -1,0 +1,1 @@
+npm i ; npm i -g tsoa@3.2.1 js-yaml mocha@8.1.1 ts-node@v9.0.0
