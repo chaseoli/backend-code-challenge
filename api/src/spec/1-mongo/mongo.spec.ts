@@ -1,5 +1,5 @@
-import 'mocha'
-var expect = require('chai').expect
+
+import { expect } from 'chai'
 import { MongoClient } from 'mongodb'
 import { IGlobal } from '../../models/env.type'
 import { startMongo } from '../../database'

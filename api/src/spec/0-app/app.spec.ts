@@ -4,7 +4,7 @@
 //   // after,
 //   // before
 // } from 'mocha'
-// // var expect = require('chai').expect
+// // import { expect } from 'chai'
 // import { IEnv } from '../../models/env.type'
 // import * as _ from 'lodash'
 

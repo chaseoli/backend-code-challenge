@@ -1,4 +1,4 @@
-import 'mocha'
+
 var expect = require('chai').expect
 import { UserContext } from '../../context/user.context'
 import { testUid } from '../test.constants'

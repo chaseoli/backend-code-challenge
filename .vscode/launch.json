@@ -58,7 +58,7 @@
     },
     {
       // Debug unit tests in TS
-      "name": "test ./api", // LOCAL ONLY
+      "name": "mocha ./api", // LOCAL ONLY
       "type": "node",
       "runtimeExecutable": "node",
       "request": "launch",
