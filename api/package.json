@@ -38,6 +38,7 @@
     "@types/express-session": "^1.15.11",
     "@types/lodash": "^4.14.104",
     "@types/mocha": "^7.0.1",
+    "@types/mongodb": "^3.5.26",
     "@types/node": "^11.9.4",
     "chai": "^4.2.0",
     "js-yaml": "^3.13.1",

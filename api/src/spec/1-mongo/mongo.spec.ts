@@ -1,3 +1,4 @@
+import 'mocha'
 import { expect } from 'chai'
 import { MongoClient } from 'mongodb'
 import { IGlobal } from '../../models/env.type'
