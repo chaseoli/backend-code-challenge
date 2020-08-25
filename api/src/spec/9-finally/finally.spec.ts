@@ -1,5 +1,5 @@
 
-var expect = require('chai').expect
+import {expect} from 'chai'
 import { UserContext } from '../../context/user.context'
 import { testUid } from '../test.constants'
 
