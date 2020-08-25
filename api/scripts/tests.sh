@@ -20,5 +20,5 @@ mkdir spec-lib
 # tsc -p ./tsconfig.spec.json
 
 # env db_uri=$_db_uri GOOGLE_APPLICATION_CREDENTIALS=$_GOOGLE_APPLICATION_CREDENTIALS build=$_build firebase_database_url=$_firebase_database_url mocha --timeout 999999  --exit --colors spec-lib/spec/**/*.spec.js
-env  db_uri=$_db_uri GOOGLE_APPLICATION_CREDENTIALS=$_GOOGLE_APPLICATION_CREDENTIALS build=$_build firebase_database_url=$_firebase_database_url ts-node ts-mocha -p tsconfig.spec.json --timeout 999999  --exit --colors src/spec/**/*.spec.ts
+env  db_uri=$_db_uri GOOGLE_APPLICATION_CREDENTIALS=$_GOOGLE_APPLICATION_CREDENTIALS build=$_build firebase_database_url=$_firebase_database_url ts-mocha -p tsconfig.spec.json --timeout 999999  --exit --colors src/spec/**/*.spec.ts
 
