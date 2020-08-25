@@ -51,7 +51,7 @@ jobs:
       #   working-directory: ./api
       - uses: actions/checkout@v2
       - name: Run tests
-        run: sh scripts/install-deps ; sh scripts/tests.sh $db_uri $GOOGLE_APPLICATION_CREDENTIALS $build $firebase_database_url
+        run: sh scripts/install-deps.sh ; sh scripts/tests.sh $db_uri $GOOGLE_APPLICATION_CREDENTIALS $build $firebase_database_url
         env: 
           db_uri: ${{ secrets.DB_URI }}
           build: dev
