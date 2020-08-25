@@ -7,8 +7,9 @@
     "start": "npm run start-api & npm run start-ui",
     "start-api": "npm run --prefix api start-dev",
     "start-ui": "npm run --prefix pokemon-app start",
-    "test": "npm run decrypt-secrets & npm run --prefix api test",
-    "deploy-dev": "npm run --prefix deploy-dev",
+    "test": "npm run decrypt-secrets ; npm run --prefix api test",
+    "deploy-dev": "npm run --prefix api deploy-dev",
+    "install-deps": "npm i ; npm run --prefix api install-deps ; npm run --prefix pokemon-app install-deps",
     "encrypt-secrets": "npm run --prefix api encrypt-secrets",
     "decrypt-secrets": "npm run --prefix api decrypt-secrets"
   },

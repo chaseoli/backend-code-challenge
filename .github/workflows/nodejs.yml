@@ -24,34 +24,34 @@ jobs:
         node-version: [12.x]
 
     steps:
-      - uses: actions/checkout@v2
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v1
-        with:
-          node-version: ${{ matrix.node-version }}
+      # - uses: actions/checkout@v2
+      # - name: Use Node.js ${{ matrix.node-version }}
+      #   uses: actions/setup-node@v1
+      #   with:
+      #     node-version: ${{ matrix.node-version }}
 
       #  all installs
       # - name: install deps for ./pokemon-app
       #   run: npm install
       #   working-directory: ./pokemon-app
-      - name: install deps for ./api
-        run: npm install ; npm i -g tsoa@3.2.1 js-yaml typescript@3.9.7 @angular/cli mocha@8.1.1 ts-node@v9.0.0 ts-mocha@v7.0.0
-        working-directory: ./api
+      # - name: install deps for ./api
+      #   run: npm i ; npm i -g tsoa@3.2.1 js-yaml typescript@3.9.7 @angular/cli mocha@8.1.1 ts-node@v9.0.0
+      #   working-directory: ./api
 
       # server API
-      - uses: actions/checkout@v2
-      - name: Decrypt secret
-        env:
-          POKEMON_PASSPHRASE: ${{ secrets.POKEMON_PASSPHRASE }}
-        working-directory: ./api
-        run: sh scripts/decrypt-secrets.sh $POKEMON_PASSPHRASE
-      - uses: actions/checkout@v2
+      # - uses: actions/checkout@v2
+      # - name: Decrypt secret
+      #   env:
+      #     POKEMON_PASSPHRASE: ${{ secrets.POKEMON_PASSPHRASE }}
+      #   working-directory: ./api
+      #   run: sh scripts/decrypt-secrets.sh $POKEMON_PASSPHRASE
+      # - uses: actions/checkout@v2
       # - name: Test printing your secret (Remove this step in production)
       #   run: cat $HOME/secrets/dev.env
       #   working-directory: ./api
       - uses: actions/checkout@v2
       - name: Run tests
-        run: sh scripts/tests.sh $db_uri $GOOGLE_APPLICATION_CREDENTIALS $build $firebase_database_url
+        run: sh scripts/install-deps ; sh scripts/tests.sh $db_uri $GOOGLE_APPLICATION_CREDENTIALS $build $firebase_database_url
         env: 
           db_uri: ${{ secrets.DB_URI }}
           build: dev

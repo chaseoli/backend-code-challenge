@@ -7,6 +7,7 @@
     "node": ">=8"
   },
   "scripts": {
+    "install-deps": "sh scripts/install-deps.sh",
     "start": "node app.js",
     "start-dev": "sh scripts/build.sh && sh scripts/start-dev.sh",
     "start-debug": "sh scripts/build.sh && sh scripts/start-debug.sh",

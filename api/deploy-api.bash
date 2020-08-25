@@ -82,7 +82,7 @@ build()
     if [ $install == true ]
     then
         echo "installing all dependencies"
-        npm i -g tsoa@3.2.1 js-yaml typescript@3.9.7 @angular/cli mocha@8.1.1 ts-node@v9.0.0 ts-mocha@v7.0.0
+        npm i -g tsoa@3.2.1 js-yaml typescript@3.9.7 @angular/cli mocha@8.1.1 ts-node@v9.0.0
         npm i 
     fi
 
