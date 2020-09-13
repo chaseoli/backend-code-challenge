@@ -1,6 +1,6 @@
 [![Github Actions Status](https://github.com/chaseoli/backend-code-challenge/workflows/Build%20%26%20Test/badge.svg?branch=master)](https://github.com/chaseoli/backend-code-challenge/actions)
 
-# Test for Dream Job on Quantum Team
+# Test for Quantum Team
 
 Links
 * Swagger/OAS3 Docs - [https://app.swaggerhub.com/apis-docs/chaseoli/quantum-pokemon/1.0.2](https://app.swaggerhub.com/apis-docs/chaseoli/quantum-pokemon/1.0.2)
